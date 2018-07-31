@@ -1,0 +1,8 @@
+services:
+  Neighborhoods\KojoExamples\V1\WorkerInterface:
+    class: Neighborhoods\KojoExamples\V1\Worker
+    public: true
+    shared: false
+    calls:
+      - [setV1WorkerDelegateRepository, ['@neighborhoods.kojo_example.v1.worker.delegate.repository']]
+      - [setV1WorkerQueue, ['@neighborhoods.kojo_example.v1.worker.queue']]
