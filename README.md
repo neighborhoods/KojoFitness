@@ -1,2 +1,2 @@
-# kojo-examples
-Examples of how to use Kōjō.
+# KōjōFitjness
+Fitness functions for Kōjō.
