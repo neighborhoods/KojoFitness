@@ -15,7 +15,7 @@
   },
   "require": {
     "php": ">=7.1",
-    "neighborhoods/kojo": "^4.x-dev",
+    "neighborhoods/kojo": "^3.0.0",
     "aws/aws-sdk-php": "2.*"
   },
   "require-dev": {
