@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Worker;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Worker;
 
-use Neighborhoods\V1\Worker\Queue\MessageInterface;
+use Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\MessageInterface;
 
 interface DelegateInterface
 {

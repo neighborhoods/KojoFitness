@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Aws\Sqs\SqsClient;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Aws\Sqs\SqsClient;
 
 use Aws\Sqs\SqsClient;
 

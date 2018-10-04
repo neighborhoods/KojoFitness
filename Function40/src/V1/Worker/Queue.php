@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Worker;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Worker;
 
 use Guzzle\Service\Resource\Model;
-use Neighborhoods\V1;
-use Neighborhoods\V1\Aws;
-use Neighborhoods\V1\Worker\Queue\MessageInterface;
+use Neighborhoods\KojoFitnessFunction40\V1;
+use Neighborhoods\KojoFitnessFunction40\V1\Aws;
+use Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\MessageInterface;
 
 class Queue implements QueueInterface
 {
@@ -89,10 +89,5 @@ class Queue implements QueueInterface
         }
 
         return $this->queueUrl;
-    }
-
-    public function setNumberOfPollCycles(int $numberOfPollCycles): QueueInterface
-    {
-        // TODO: Implement setNumberOfPollCycles() method.
     }
 }

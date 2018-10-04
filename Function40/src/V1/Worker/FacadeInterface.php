@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Worker;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Worker;
 
 interface FacadeInterface
 {

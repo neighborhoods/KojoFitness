@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Worker\Queue;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue;
 
 use Guzzle\Service\Resource\Model;
 

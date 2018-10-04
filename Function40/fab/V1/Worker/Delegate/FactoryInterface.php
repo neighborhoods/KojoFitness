@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Worker\Delegate;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Worker\Delegate;
 
-use Neighborhoods\V1\Worker\DelegateInterface;
+use Neighborhoods\KojoFitnessFunction40\V1\Worker\DelegateInterface;
 
 interface FactoryInterface
 {

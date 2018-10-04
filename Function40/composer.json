@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Neighborhoods\\V1\\": [
+      "Neighborhoods\\KojoFitnessFunction40\\V1\\": [
         "src/V1",
         "fab/V1"
       ]
@@ -31,7 +31,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Neighborhoods\\V1\\": [
+      "Neighborhoods\\KojoFitnessFunction40\\V1\\": [
         "test/",
         "test-fab/"
       ]

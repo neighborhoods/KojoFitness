@@ -1,6 +1,6 @@
 services:
   neighborhoods.v1.worker.queue.message.factory:
-    class: Neighborhoods\V1\Worker\Queue\Message\Factory
+    class: Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\Message\Factory
     public: false
     shared: true
     calls:

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\V1\Worker\Queue\Message\Factory;
+namespace Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\Message\Factory;
 
-use Neighborhoods\V1\Worker\Queue\Message\FactoryInterface;
+use Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\Message\FactoryInterface;
 
 /** @codeCoverageIgnore */
 trait AwareTrait
