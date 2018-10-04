@@ -1,11 +1,11 @@
 services:
-  neighborhoods.kojo_example.v1.worker.queue.message:
-    class: Neighborhoods\KojoExamples\V1\Worker\Queue\Message
+  neighborhoods.v1.worker.queue.message:
+    class: Neighborhoods\V1\Worker\Queue\Message
     public: false
     shared: false
     calls:
       - [setV1AwsSqsSqsClient, ['@v1.aws.sqs.sqs_client']]
-      - [setQueueUrl, ['%neighborhoods.kojo_example.v1.worker.queue.queue_url%']]
+      - [setQueueUrl, ['%neighborhoods.v1.worker.queue.queue_url%']]
   v1.worker.queue.message:
-    alias: neighborhoods.kojo_example.v1.worker.queue.message
+    alias: neighborhoods.v1.worker.queue.message
     public: true

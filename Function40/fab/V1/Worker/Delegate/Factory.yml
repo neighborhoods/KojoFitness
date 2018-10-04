@@ -1,7 +1,7 @@
 services:
-  neighborhoods.kojo_example.v1.worker.delegate.factory:
-    class: Neighborhoods\KojoExamples\V1\Worker\Delegate\Factory
+  neighborhoods.v1.worker.delegate.factory:
+    class: Neighborhoods\V1\Worker\Delegate\Factory
     public: false
     shared: true
     calls:
-        - [setV1WorkerDelegate, ['@neighborhoods.kojo_example.v1.worker.delegate']]
+        - [setV1WorkerDelegate, ['@neighborhoods.v1.worker.delegate']]

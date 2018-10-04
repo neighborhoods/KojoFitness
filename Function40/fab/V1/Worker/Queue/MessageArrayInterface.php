@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker\Queue;
+namespace Neighborhoods\V1\Worker\Queue;
 
 /** @codeCoverageIgnore */
 interface MessageArrayInterface extends \SeekableIterator, \ArrayAccess, \Serializable, \Countable

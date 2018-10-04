@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\Aws\Sqs\SqsClient;
+namespace Neighborhoods\V1\Aws\Sqs\SqsClient;
 
 use Aws\Sqs\SqsClient;
 
@@ -10,9 +10,9 @@ trait AwareTrait
 {
     protected $AwsSqsSqsClient;
 
-    public function setAwsSqsSqsClient(SqsClient $awsSqsSqsClient): self
+    public function setV1AwsSqsSqsClient(SqsClient $awsSqsSqsClient): self
     {
-        if ($this->hasAwsSqsSqsClient()) {
+        if ($this->hasV1AwsSqsSqsClient()) {
             throw new \LogicException('AwsSqsSqsClient is already set.');
         }
         $this->AwsSqsSqsClient = $awsSqsSqsClient;
@@ -20,23 +20,23 @@ trait AwareTrait
         return $this;
     }
 
-    protected function getAwsSqsSqsClient(): SqsClient
+    protected function getV1AwsSqsSqsClient(): SqsClient
     {
-        if (!$this->hasAwsSqsSqsClient()) {
+        if (!$this->hasV1AwsSqsSqsClient()) {
             throw new \LogicException('AwsSqsSqsClient is not set.');
         }
 
         return $this->AwsSqsSqsClient;
     }
 
-    protected function hasAwsSqsSqsClient(): bool
+    protected function hasV1AwsSqsSqsClient(): bool
     {
         return isset($this->AwsSqsSqsClient);
     }
 
-    protected function unsetAwsSqsSqsClient(): self
+    protected function unsetV1AwsSqsSqsClient(): self
     {
-        if (!$this->hasAwsSqsSqsClient()) {
+        if (!$this->hasV1AwsSqsSqsClient()) {
             throw new \LogicException('AwsSqsSqsClient is not set.');
         }
         unset($this->AwsSqsSqsClient);

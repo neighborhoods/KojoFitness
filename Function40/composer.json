@@ -23,15 +23,15 @@
   },
   "autoload": {
     "psr-4": {
-      "Neighborhoods\\KojoExamples\\": [
-        "src/",
-        "fab/"
+      "Neighborhoods\\V1\\": [
+        "src/V1",
+        "fab/V1"
       ]
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Neighborhoods\\KojoExamplesTest\\": [
+      "Neighborhoods\\V1\\": [
         "test/",
         "test-fab/"
       ]

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker\Delegate\Repository;
+namespace Neighborhoods\V1\Worker\Delegate\Repository;
 
-use Neighborhoods\KojoExamples\V1\Worker\Delegate\RepositoryInterface;
+use Neighborhoods\V1\Worker\Delegate\RepositoryInterface;
 
 /** @codeCoverageIgnore */
 trait AwareTrait

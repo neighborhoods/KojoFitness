@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker;
+namespace Neighborhoods\V1\Worker;
 
 use Guzzle\Service\Resource\Model;
-use Neighborhoods\KojoExamples\V1;
-use Neighborhoods\KojoExamples\Aws;
-use Neighborhoods\KojoExamples\V1\Worker\Queue\MessageInterface;
+use Neighborhoods\V1;
+use Neighborhoods\V1\Aws;
+use Neighborhoods\V1\Worker\Queue\MessageInterface;
 
 class Queue implements QueueInterface
 {

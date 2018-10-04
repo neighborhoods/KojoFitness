@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker\Queue;
+namespace Neighborhoods\V1\Worker\Queue;
 
-use Neighborhoods\KojoExamples\V1\Worker\QueueInterface;
+use Neighborhoods\V1\Worker\QueueInterface;
 
 /** @codeCoverageIgnore */
 trait AwareTrait

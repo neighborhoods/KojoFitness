@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker\Queue;
+namespace Neighborhoods\V1\Worker\Queue;
 
-use Neighborhoods\KojoExamples\Guzzle;
-use Neighborhoods\KojoExamples\Aws;
+use Neighborhoods\V1\Guzzle;
+use Neighborhoods\V1\Aws;
 
 class Message implements MessageInterface
 {
@@ -23,7 +23,7 @@ class Message implements MessageInterface
         }
         $messages = $this->getGuzzleServiceResourceModel()->get('Messages');
         $receiptHandle = $messages[0][self::SQS_CLIENT_RECEIPT_HANDLE];
-        $this->getAwsSqsSqsClient()->deleteMessage([
+        $this->getV1AwsSqsSqsClient()->deleteMessage([
             self::SQS_CLIENT_QUEUE_URL => $this->getQueueUrl(),
             self::SQS_CLIENT_RECEIPT_HANDLE => $receiptHandle,
         ]);

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\Guzzle\Service\Resource\Model;
+namespace Neighborhoods\V1\Guzzle\Service\Resource\Model;
 
 use Guzzle\Service\Resource\Model;
 

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker\Delegate;
+namespace Neighborhoods\V1\Worker\Delegate;
 
-use Neighborhoods\KojoExamples\V1\Worker\DelegateInterface;
-use Neighborhoods\KojoExamples\V1\Worker;
+use Neighborhoods\V1\Worker\DelegateInterface;
+use Neighborhoods\V1\Worker;
 
 class Repository implements RepositoryInterface
 {

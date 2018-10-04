@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoExamples\V1\Worker;
+namespace Neighborhoods\V1\Worker;
 
-use Neighborhoods\KojoExamples\V1\WorkerInterface;
 use Neighborhoods\Pylon\DependencyInjection;
-use Symfony\Component\Finder\Finder;
 use Neighborhoods\Kojo\Api;
+use Neighborhoods\V1\WorkerInterface;
+use Symfony\Component\Finder\Finder;
 
 class Facade implements FacadeInterface
 {
@@ -30,6 +30,7 @@ class Facade implements FacadeInterface
         }
         $containerBuilderFacade = $this->getContainerBuilderFacade();
         $discoverableDirectories[] = __DIR__ . '/../../../src';
+        $discoverableDirectories[] = __DIR__ . '/../../../fab';
         $finder = new Finder();
         $finder->name('*.yml');
         $finder->files()->in($discoverableDirectories);
