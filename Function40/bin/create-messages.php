@@ -9,7 +9,7 @@ $client = \Aws\Sqs\SqsClient::factory(
     ['region' => 'us-east-1']
 );
 
-$totalNumberOfMessagesToSend = 120;
+$totalNumberOfMessagesToSend = 500;
 $messageCount = 0;
 while ($messageCount !== $totalNumberOfMessagesToSend) {
     $client->sendMessage(array(
@@ -18,6 +18,9 @@ while ($messageCount !== $totalNumberOfMessagesToSend) {
     ));
 
     ++$messageCount;
+    if ($messageCount % 100 === 0){
+        echo "Wrote 100 messages to SQS, {$messageCount}/{$totalNumberOfMessagesToSend} in total\n";
+    }
 }
 
 return;
