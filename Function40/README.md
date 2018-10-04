@@ -8,7 +8,7 @@
  
  Make sure you have pulled the latest version of Mason from Master
  ```bash
- git clone git@github.com:neighborhoods/KojoFitness.git
+ git clone git@github.com:neighborhoods/KojoFitness.git;
  cd KojoFitness;
  git checkout 4.x;
  cd ../Mason;
