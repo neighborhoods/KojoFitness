@@ -8,14 +8,14 @@ use Neighborhoods\Kojo\Api;
 class Worker implements WorkerInterface
 {
     use Worker\Delegate\Repository\AwareTrait;
-    use Api\V2\Worker\Service\AwareTrait;
+    use Api\V1\Worker\Service\AwareTrait;
     use Worker\Queue\AwareTrait;
     public const JOB_TYPE_CODE = 'protean_dlcp_example';
 
     public function work() : WorkerInterface
     {
         $this->fireEvent('new_worker');
-        if ($this->getApiV2WorkerService()->getTimesCrashed() === 0 && $this->getV2WorkerQueue()->hasNextMessage()) {
+        if ($this->getApiV1WorkerService()->getTimesCrashed() === 0 && $this->getV2WorkerQueue()->hasNextMessage()) {
             // Wait for one message to become available.
             $this->fireEvent('message_received');
             // Schedule another kōjō job of the same type.
@@ -33,7 +33,7 @@ class Worker implements WorkerInterface
 
         // Tell Kōjō that we are done and all is well.
         $this->fireEvent('complete_success');
-        $this->getApiV2WorkerService()->requestCompleteSuccess()->applyRequest();
+        $this->getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
 
         // Fluent interfaces for the love of Pete.
         return $this;
@@ -59,7 +59,7 @@ class Worker implements WorkerInterface
     protected function _scheduleNextJob() : WorkerInterface
     {
         $this->fireEvent('schedule_next_job');
-        $newJobScheduler = $this->getApiV2WorkerService()->getNewJobScheduler();
+        $newJobScheduler = $this->getApiV1WorkerService()->getNewJobScheduler();
         $newJobScheduler->setJobTypeCode(self::JOB_TYPE_CODE)
             ->setWorkAtDateTime(new \DateTime('now'))
             ->save();
@@ -72,7 +72,7 @@ class Worker implements WorkerInterface
         if (extension_loaded('newrelic')) {
             newrelic_record_custom_event($event, ['job_type' => self::JOB_TYPE_CODE]);
         }
-        $this->getApiV2WorkerService()->getLogger()->info($event, ['job_type' => self::JOB_TYPE_CODE]);
+        $this->getApiV1WorkerService()->getLogger()->info($event, ['job_type' => self::JOB_TYPE_CODE]);
 
         return $this;
     }

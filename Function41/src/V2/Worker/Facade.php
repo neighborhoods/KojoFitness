@@ -10,7 +10,7 @@ use Symfony\Component\Finder\Finder;
 
 class Facade implements FacadeInterface
 {
-    use Api\V2\Worker\Service\AwareTrait;
+    use Api\V1\Worker\Service\AwareTrait;
     protected $containerBuilderFacade;
     protected $worker;
     protected $isBootStrapped = false;
@@ -65,7 +65,7 @@ class Facade implements FacadeInterface
         if ($this->worker !== null) {
             throw new \LogicException('Worker is already set.');
         }
-        $this->worker = $worker->setApiV2WorkerService($this->getApiV2WorkerService());
+        $this->worker = $worker->setApiV1WorkerService($this->getApiV1WorkerService());
 
         return $this;
     }
