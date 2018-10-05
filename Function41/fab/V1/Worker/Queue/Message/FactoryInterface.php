@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\Message;
+namespace Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue\Message;
 
-use Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue\MessageInterface;
+use Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue\MessageInterface;
 
 /** @codeCoverageIgnore */
 interface FactoryInterface

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoFitnessFunction40\V1\Worker;
+namespace Neighborhoods\KojoFitnessFunction41\V1\Worker;
 
-use Neighborhoods\KojoFitnessFunction40\V1\Worker;
+use Neighborhoods\KojoFitnessFunction41\V1\Worker;
 
 class Delegate implements DelegateInterface
 {

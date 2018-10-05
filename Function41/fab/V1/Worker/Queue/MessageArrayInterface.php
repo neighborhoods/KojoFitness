@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue;
+namespace Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue;
 
 /** @codeCoverageIgnore */
 interface MessageArrayInterface extends \SeekableIterator, \ArrayAccess, \Serializable, \Countable

@@ -1,0 +1,14 @@
+parameters:
+  neighborhoods.v2.worker.queue.queue_url: 'https://sqs.us-east-1.amazonaws.com/272157948465/local-bwilson'
+services:
+  neighborhoods.v2.worker.queue:
+    class: Neighborhoods\KojoFitnessFunction41\V2\Worker\Queue
+    public: true
+    shared: false
+    calls:
+    - [setV2WorkerQueueMessageFactory, ['@neighborhoods.v2.worker.queue.message.factory']]
+    - [setV2AwsSqsSqsClient, ['@v2.aws.sqs.sqs_client']]
+    - [setQueueUrl, ['%neighborhoods.v2.worker.queue.queue_url%']]
+  v2.worker.queue:
+    alias: neighborhoods.v2.worker.queue
+    public: true

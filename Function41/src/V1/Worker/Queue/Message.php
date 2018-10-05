@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue;
+namespace Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue;
 
-use Neighborhoods\KojoFitnessFunction40\V1\Guzzle;
-use Neighborhoods\KojoFitnessFunction40\V1\Aws;
+use Neighborhoods\KojoFitnessFunction41\V1\Guzzle;
+use Neighborhoods\KojoFitnessFunction41\V1\Aws;
 
 class Message implements MessageInterface
 {

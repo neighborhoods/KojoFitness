@@ -2,7 +2,7 @@ parameters:
   neighborhoods.v1.worker.queue.queue_url: 'https://sqs.us-east-1.amazonaws.com/272157948465/local-bwilson'
 services:
   neighborhoods.v1.worker.queue:
-    class: Neighborhoods\KojoFitnessFunction40\V1\Worker\Queue
+    class: Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue
     public: true
     shared: false
     calls:

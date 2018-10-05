@@ -1,6 +1,6 @@
 services:
-  Neighborhoods\KojoFitnessFunction40\V1\WorkerInterface:
-    class: Neighborhoods\KojoFitnessFunction40\V1\Worker
+  Neighborhoods\KojoFitnessFunction41\V1\WorkerInterface:
+    class: Neighborhoods\KojoFitnessFunction41\V1\Worker
     public: true
     shared: false
     calls:

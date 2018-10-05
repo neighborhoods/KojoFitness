@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoFitnessFunction40\V1\Worker;
+namespace Neighborhoods\KojoFitnessFunction41\V1\Worker;
 
 use Neighborhoods\Pylon\DependencyInjection;
 use Neighborhoods\Kojo\Api;
-use Neighborhoods\KojoFitnessFunction40\V1\WorkerInterface;
+use Neighborhoods\KojoFitnessFunction41\V1\WorkerInterface;
 use Symfony\Component\Finder\Finder;
 
 class Facade implements FacadeInterface

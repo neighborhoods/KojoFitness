@@ -13,7 +13,7 @@ $finder->name('*.yml');
 $finder->files()->in($discoverableDirectories);
 $jobCreator = (new Job\Type\Service())->addYmlServiceFinder($finder)->getNewJobTypeRegistrar();
 $jobCreator->setCode('protean_dlcp_example')
-    ->setWorkerClassUri(\Neighborhoods\KojoFitnessFunction40\V1\Worker\Facade::class)
+    ->setWorkerClassUri(\Neighborhoods\KojoFitnessFunction41\V2\Worker\Facade::class)
     ->setWorkerMethod('start')
     ->setName('Protean DLCP Example')
     ->setCronExpression('* * * * *')

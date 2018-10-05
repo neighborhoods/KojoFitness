@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\KojoFitnessFunction40\V1;
+namespace Neighborhoods\KojoFitnessFunction41\V1;
 
 use Neighborhoods\Kojo\Api;
 

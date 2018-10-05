@@ -1,0 +1,10 @@
+parameters:
+  v2.aws.sqs.sqs_client.region: '%env(SQS_REGION)%'
+services:
+  v2.aws.sqs.sqs_client:
+    class: Aws\Sqs\SqsClient
+    public: false
+    shared: false
+    factory: [Aws\Sqs\SqsClient, factory]
+    arguments:
+    - region: '%v2.aws.sqs.sqs_client.region%'
