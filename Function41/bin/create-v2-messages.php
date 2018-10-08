@@ -15,6 +15,7 @@ $client = \Aws\Sqs\SqsClient::factory(
 
 $totalNumberOfMessagesToSend = 500;
 $messageCount = 0;
+$queueName = QUEUE_NAME;
 while ($messageCount !== $totalNumberOfMessagesToSend) {
     try {
         $client->getQueueUrl(
@@ -38,7 +39,7 @@ while ($messageCount !== $totalNumberOfMessagesToSend) {
 
     ++$messageCount;
     if ($messageCount % 100 === 0) {
-        echo "Wrote 100 messages to SQS, {$messageCount}/{$totalNumberOfMessagesToSend} in total\n";
+        echo "Wrote 100 messages to SQS, {$messageCount}/{$totalNumberOfMessagesToSend} in total to {$queueName}\n";
     }
 }
 

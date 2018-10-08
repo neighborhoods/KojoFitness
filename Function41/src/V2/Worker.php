@@ -72,7 +72,10 @@ class Worker implements WorkerInterface
         if (extension_loaded('newrelic')) {
             newrelic_record_custom_event($event, ['job_type' => self::JOB_TYPE_CODE]);
         }
-        $this->getApiV1WorkerService()->getLogger()->info($event, ['job_type' => self::JOB_TYPE_CODE]);
+        $this->getApiV1WorkerService()->getLogger()->info(
+            implode(": ", [self::JOB_TYPE_CODE, $event]),
+            ['job_type' => self::JOB_TYPE_CODE]
+        );
 
         return $this;
     }

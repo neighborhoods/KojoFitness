@@ -32,12 +32,25 @@
  docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v2-messages.php';
  
  # Run Kōjō to delete the messages and colorize the events
- docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/' |\
-  awk '{ gsub("new_worker", "\033[1;36m&\033[0m"); gsub("working", "\033[1;33m&\033[0m"); gsub("complete_success", "\033[1;32m&\033[0m"); print }';
+ # Look for a mix of orange and cyan (v1) and blue (v2) messages
+ docker-compose exec kojo_fitness bash -c 'cd Function41; touch kojo_v1.out'; 
+ docker-compose exec kojo_fitness bash -c 'cd Function41; touch kojo_v2.out'; 
+ docker-compose exec -T -d kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/ >> kojo_v1.out'; 
+ docker-compose exec -T -d  kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo process:pool:server:start $PWD/src/V2/Environment/ >> kojo_v2.out'; 
+ docker-compose exec kojo_fitness bash -c 'cd Function41; tail -f kojo_*'|\
+  awk '{ 
+  gsub("namespace_lock_v1", "\033[46m&\033[0m"); 
+  gsub("namespace_lock_v2", "\033[44m&\033[0m"); 
+  gsub("new_worker", "\033[1;36m&\033[0m"); 
+  gsub("working", "\033[1;33m&\033[0m"); 
+  gsub("complete_success", "\033[1;32m&\033[0m"); 
+  print }';
   
  # After you see "working" events stop and a few "complete_success" then all messages have been deleted. Press ctrl+c
  
  # Delete the Kōjō Tables and clear redis
+ docker-compose exec kojo_fitness bash -c 'pkill -9 -f kojo';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; rm -f kojo_*.out';
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V1/Environment/';
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V2/Environment/';
  docker-compose exec redis redis-cli flushall;

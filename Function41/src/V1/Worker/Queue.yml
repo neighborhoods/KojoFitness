@@ -1,5 +1,5 @@
 parameters:
-  neighborhoods.v1.worker.queue.queue_url: 'https://sqs.us-east-1.amazonaws.com/272157948465/local-bwilson'
+  neighborhoods.v1.worker.queue.queue_url: 'https://sqs.us-east-1.amazonaws.com/272157948465/local-kojo-namespace-lock-v1'
 services:
   neighborhoods.v1.worker.queue:
     class: Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue
