@@ -28,8 +28,16 @@
  docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/setup-v2-worker.php';
  
  # Create messages for Kōjō to delete
- docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v1-messages.php';
- docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v2-messages.php';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v1-messages.php'|\
+   awk '{ 
+   gsub("namespace-lock-v1", "\033[46m&\033[0m"); 
+   gsub("namespace-lock-v2", "\033[44m&\033[0m");
+   print }';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v2-messages.php'|\
+   awk '{ 
+   gsub("namespace-lock-v1", "\033[46m&\033[0m"); 
+   gsub("namespace-lock-v2", "\033[44m&\033[0m");
+   print }';
  
  # Run Kōjō to delete the messages and colorize the events
  # Look for a mix of orange and cyan (v1) and blue (v2) messages
