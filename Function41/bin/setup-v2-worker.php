@@ -7,15 +7,15 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Symfony\Component\Finder\Finder;
 use Neighborhoods\Kojo\Api\V1\Job;
 
-$discoverableDirectories[] = __DIR__ . '/../src/V1/Environment';
+$discoverableDirectories[] = __DIR__ . '/../src/V2/Environment';
 $finder = new Finder();
 $finder->name('*.yml');
 $finder->files()->in($discoverableDirectories);
 $jobCreator = (new Job\Type\Service())->addYmlServiceFinder($finder)->getNewJobTypeRegistrar();
-$jobCreator->setCode('protean_dlcp_example')
+$jobCreator->setCode('namespace_lock_v2')
     ->setWorkerClassUri(\Neighborhoods\KojoFitnessFunction41\V2\Worker\Facade::class)
     ->setWorkerMethod('start')
-    ->setName('Protean DLCP Example')
+    ->setName('Multi Server Namespace Lock Test V2')
     ->setCronExpression('* * * * *')
     ->setCanWorkInParallel(true)
     ->setDefaultImportance(10)

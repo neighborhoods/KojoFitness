@@ -10,7 +10,7 @@ class Worker implements WorkerInterface
     use Worker\Delegate\Repository\AwareTrait;
     use Api\V1\Worker\Service\AwareTrait;
     use Worker\Queue\AwareTrait;
-    public const JOB_TYPE_CODE = 'protean_dlcp_example';
+    public const JOB_TYPE_CODE = 'namespace_lock_v1';
 
     public function work() : WorkerInterface
     {

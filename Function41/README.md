@@ -16,16 +16,20 @@
  docker-compose build --no-cache kojo_fitness nginx && docker-compose up -d;
  
  # Create a database
- touch data/pgsql/dumps/kojo_fitness.sql;  
- docker-compose exec pgsql /docker-entrypoint-initdb.d/init.sh;
+ touch data/pgsql/dumps/kojo_fitness_v1.sql;  
+ touch data/pgsql/dumps/kojo_fitness_v2.sql;  
+ docker-compose exec pgsql /docker-entrypoint-initdb.d/init.sh 'kojo_fitness_v1 kojo_fitness_v2';
  
  # Prepare Kōjō
  docker-compose exec kojo_fitness bash -c 'cd Function41; composer install';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:setup:install $PWD/src/V1/Environment/';
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:setup:install $PWD/src/V2/Environment/';
- docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/setup-worker.php';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/setup-v1-worker.php';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/setup-v2-worker.php';
  
  # Create messages for Kōjō to delete
- docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-messages.php';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v1-messages.php';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; php ./bin/create-v2-messages.php';
  
  # Run Kōjō to delete the messages and colorize the events
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/' |\
@@ -35,5 +39,6 @@
  
  # Delete the Kōjō Tables and clear redis
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V1/Environment/';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V2/Environment/';
  docker-compose exec redis redis-cli flushall;
  ```
