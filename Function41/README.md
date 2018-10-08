@@ -1,5 +1,5 @@
 # Defines the fitness of Kōjō for
- - A single job that deletes SQS queue messages
+ - Two side-by-side servers that should both be able to do work at the same time
  
  ## Setup Function41
  
