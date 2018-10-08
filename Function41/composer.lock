@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "6328c0cc668bc24cb44c2d072a89c0c3",
+  "content-hash": "1ed34e3167069d37fb1303a2f511678f",
   "packages": [
     {
       "name": "aws/aws-sdk-php",
@@ -444,16 +444,16 @@
     },
     {
       "name": "neighborhoods/kojo",
-      "version": "3.3.3",
+      "version": "4.x-dev",
       "source": {
         "type": "git",
         "url": "https://github.com/neighborhoods/kojo.git",
-        "reference": "c6aec7e0d3ed31c765f0c3faa7d2781e80b4aa6b"
+        "reference": "ece51e0caca6f740c3e4717fb247e630633bf887"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/neighborhoods/kojo/zipball/c6aec7e0d3ed31c765f0c3faa7d2781e80b4aa6b",
-        "reference": "c6aec7e0d3ed31c765f0c3faa7d2781e80b4aa6b",
+        "url": "https://api.github.com/repos/neighborhoods/kojo/zipball/ece51e0caca6f740c3e4717fb247e630633bf887",
+        "reference": "ece51e0caca6f740c3e4717fb247e630633bf887",
         "shasum": ""
       },
       "require": {
@@ -497,7 +497,7 @@
         }
       ],
       "description": "Neighborhoods Kōjō is a distributed task manager.",
-      "time": "2018-07-26T20:16:54+00:00"
+      "time": "2018-09-04T23:11:39+00:00"
     },
     {
       "name": "psr/cache",
@@ -1453,7 +1453,9 @@
   "packages-dev": [],
   "aliases": [],
   "minimum-stability": "stable",
-  "stability-flags": [],
+  "stability-flags": {
+    "neighborhoods/kojo": 20
+  },
   "prefer-stable": false,
   "prefer-lowest": false,
   "platform": {
