@@ -1,0 +1,11 @@
+services:
+  neighborhoods.v1.worker.queue.message:
+    class: Neighborhoods\KojoFitnessFunction41\V1\Worker\Queue\Message
+    public: false
+    shared: false
+    calls:
+    - [setV1AwsSqsSqsClient, ['@v1.aws.sqs.sqs_client']]
+    - [setQueueUrl, ['%neighborhoods.v1.worker.queue.queue_url%']]
+  v1.worker.queue.message:
+    alias: neighborhoods.v1.worker.queue.message
+    public: true
