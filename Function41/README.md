@@ -45,7 +45,7 @@
  docker-compose exec kojo_fitness bash -c 'cd Function41; touch kojo_v2.out'; 
  docker-compose exec -T -d kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/ >> kojo_v1.out'; 
  docker-compose exec -T -d  kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo process:pool:server:start $PWD/src/V2/Environment/ >> kojo_v2.out'; 
- docker-compose exec kojo_fitness bash -c 'cd Function41; tail -f kojo_*'|\
+ docker-compose exec kojo_fitness bash -c 'cd Function41; tail -f kojo_*.out'|\
   awk '{ 
   gsub("namespace_lock_v1", "\033[46m&\033[0m"); 
   gsub("namespace_lock_v2", "\033[45m&\033[0m"); 
@@ -59,6 +59,7 @@
  # Delete the Kōjō Tables and clear redis
  docker-compose exec kojo_fitness bash -c 'pkill -9 -f kojo';
  docker-compose exec kojo_fitness bash -c 'cd Function41; rm -f kojo_*.out';
+ docker-compose exec kojo_fitness bash -c 'cd Function41; rm -rf /tmp/neighborhoods';
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V1/Environment/';
  docker-compose exec kojo_fitness bash -c 'cd Function41; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V2/Environment/';
  docker-compose exec redis redis-cli flushall;

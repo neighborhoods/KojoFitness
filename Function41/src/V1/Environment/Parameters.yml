@@ -8,3 +8,4 @@ parameters:
   neighborhoods.kojo.environment.parameters.database_adapter: '%env(DATABASE_ADAPTER)%'
   neighborhoods.kojo.environment.parameters.database_host: '%env(DATABASE_HOST)%'
   neighborhoods.kojo.environment.parameters.database_name: 'kojo_fitness_v1'
+  neighborhoods.kojo.environment.parameters.lock_prefix: 'kojo_fitness_v1_'
