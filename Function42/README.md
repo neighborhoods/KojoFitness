@@ -35,6 +35,8 @@
   gsub("working", "\033[1;33m&\033[0m"); 
   gsub("complete_success", "\033[1;32m&\033[0m"); 
   gsub("critical", "\033[5;101m&\033[0m"); 
+  gsub("Panicking", "\033[5;95m&\033[0m"); 
+  gsub("lucky", "\033[5;102m&\033[0m"); 
   print }';
   
  # After you see "working" events stop and a few "complete_success" then all messages have been deleted. Press ctrl+c
