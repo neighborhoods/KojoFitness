@@ -14,9 +14,13 @@ class Delegate implements DelegateInterface
         if ((bool)random_int(0, 1)) {
             $this->getV1WorkerQueueMessage()->delete();
         } else {
-            throw new \TypeError("Didn't get lucky");
+            $this->onlyTakesIntegers('Not very lucky');
         }
 
         return $this;
+    }
+
+    public function onlyTakesIntegers(int $number){
+        return $number;
     }
 }
