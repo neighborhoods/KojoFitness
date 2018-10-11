@@ -1,6 +1,6 @@
 FROM neighborhoods/php-fpm-phalcon:php7.2_phalcon3.4
 RUN apt-get update -y && apt-get install -y unzip procps
-ARG PROJECT_NAME=kojo-examples
+ARG PROJECT_NAME=kojo_fitness
 
 # COMPOSER_TOKEN can also be passed via the COMPOSER_GITHUB_TOKEN file
 ARG COMPOSER_TOKEN=placeholder_token_you_must_replace_via_args_in_compose_file
