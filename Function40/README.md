@@ -4,16 +4,17 @@
  ## Setup Function40
  
  ### Running Kōjō
- Setting up the container:
+ Setting up the containers using docker-compose:
  
- Make sure you have pulled the latest version of Mason from Master
  ```bash
+ # Get the latest repo
  git clone git@github.com:neighborhoods/KojoFitness.git;
  cd KojoFitness;
  git checkout 4.x;
  git pull;
- cd ../Mason;
- docker-compose build --no-cache kojo_fitness nginx && docker-compose up -d;
+ 
+ #start the containers
+ docker-compose build --no-cache && docker-compose up -d;
  
  # Create a database
  touch data/pgsql/dumps/kojo_fitness.sql;  

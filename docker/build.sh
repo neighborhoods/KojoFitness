@@ -28,17 +28,6 @@ while [[ $# -gt 1 ]]; do
     shift
 done
 
-# Support setting composer token via file
-if [ -f "COMPOSER_GITHUB_TOKEN" ]; then
-    COMPOSER_TOKEN=$(cat COMPOSER_GITHUB_TOKEN | tr -d '[:space:]')
-fi
-
-if [[ "$COMPOSER_TOKEN" == placeholder* ]]; then
-    echo "Composer token must be set" 1>&2
-    exit 1
-fi
-
-composer config -g github-oauth.github.com $COMPOSER_TOKEN
 
 if [ -f "DEPLOY_KEY" ]; then
     echo "Installing deploy key"
@@ -49,6 +38,18 @@ if [ -f "DEPLOY_KEY" ]; then
 fi
 
 if [ "$COMPOSER_INSTALL" = true ]; then
+    # Support setting composer token via file
+    if [ -f "COMPOSER_GITHUB_TOKEN" ]; then
+        COMPOSER_TOKEN=$(cat COMPOSER_GITHUB_TOKEN | tr -d '[:space:]')
+    fi
+
+    if [[ "$COMPOSER_TOKEN" == placeholder* ]]; then
+        echo "Composer token must be set" 1>&2
+        exit 1
+    fi
+
+    composer config -g github-oauth.github.com $COMPOSER_TOKEN
+
     if [ -f "DEPLOY_KEY" ]; then
         echo "Updating composer.json to avoid Github API on private repos"
         mv composer.json composer-old.json
@@ -82,6 +83,7 @@ fi
 
 if [ "$INSTALL_XDEBUG" = true ]; then
     echo "Installing the xdebug extension..."
-    pecl install xdebug-2.7.0alpha1
+    # An xdebug version grater than xdebug-2.7.0alpha1 is required due to https://bugs.xdebug.org/bug_view_page.php?bug_id=00000938
+    pecl install xdebug-2.7.0beta1
     docker-php-ext-enable xdebug
 fi
