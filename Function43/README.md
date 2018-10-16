@@ -1,5 +1,5 @@
 # Defines the fitness of Kōjō for
- - A single job that deletes SQS queue messages
+ - Gaining more control over DLCs by specifying a maximum number of iterations they may run before returning control to Kōjō
  
  ## Setup Function43
  
