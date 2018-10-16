@@ -25,7 +25,6 @@ services:
     build:
       context: .
       args:
-      - COMPOSER_TOKEN=z
       - INSTALL_XDEBUG=true
       - COMPOSER_INSTALL=false
     volumes:
