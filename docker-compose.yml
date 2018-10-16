@@ -1,0 +1,108 @@
+version: '2'
+
+services:
+
+  ### Mount Applications ######################################
+
+  applications:
+    image: tianon/true
+    volumes:
+    - ../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
+
+  mysql_data:
+    image: tianon/true
+    volumes:
+    - ./data/mysql:/docker-entrypoint-initdb.d
+
+  pgsql_data:
+    image: tianon/true
+    volumes:
+    - ./data/pgsql:/docker-entrypoint-initdb.d
+
+    ### Kōjō Fitness Container (php-fpm) #########################
+
+  kojo_fitness:
+    build:
+      context: .
+      args:
+      - COMPOSER_TOKEN=z
+      - INSTALL_XDEBUG=true
+      - COMPOSER_INSTALL=false
+    volumes:
+    # Shares AWS credentials to the docker container
+    - $HOME/.aws:/root/.aws
+    - $HOME/.aws:/var/www/.aws
+    volumes_from:
+    - applications
+    environment:
+      SITE_ENVIRONMENT: Local
+      DATABASE_ADAPTER: "pgsql"
+      DATABASE_HOST: pgsql
+      DATABASE_USERNAME: kojo
+      DATABASE_PASSWORD: kojofitness
+      DATABASE_NAME: "kojo_fitness"
+      DATABASE_PORT: 5432
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      KOJO_REDIS_HOST: "redis"
+      KOJO_REDIS_PORT: "6379"
+      KOJO_LOG_FORMAT: "json"
+      SQS_REGION: "us-east-1"
+      PHP_IDE_CONFIG: "serverName=kojo_fitness.neighborhoods.com"
+
+### MySQL Container #########################################
+
+  mysql:
+    build:
+      context: ./mysql
+      args:
+      - MYSQL_DATABASE=kojo
+      - MYSQL_USER=kojo
+      - MYSQL_PASSWORD=kojofitness
+      - MYSQL_ROOT_PASSWORD=kojoroot
+    volumes:
+    - mysql:/var/lib/mysql
+    volumes_from:
+    - mysql_data
+    ports:
+    - "3307:3306"
+
+### PostgreSQL PostGis Container ############################
+
+  pgsql:
+    build: ./postgres
+    volumes:
+    - postgres:/var/lib/postgresql/data
+    volumes_from:
+    - pgsql_data
+    ports:
+    - "5433:5432"
+    environment:
+      POSTGRES_DB: kojo
+      POSTGRES_USER: kojo
+      POSTGRES_PASSWORD: kojofitness
+
+### Redis Container #########################################
+
+  redis:
+    build: ./redis
+    volumes:
+    - redis:/data
+    ports:
+    - "6380:6379"
+
+### Volumes Setup ###########################################
+
+volumes:
+    mysql:
+      driver: "local"
+    postgres:
+      driver: "local"
+    redis:
+      driver: "local"
+
+### Network Setup ###########################################
+
+networks:
+  default:
+    driver: bridge

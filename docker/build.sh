@@ -82,6 +82,6 @@ fi
 
 if [ "$INSTALL_XDEBUG" = true ]; then
     echo "Installing the xdebug extension..."
-    pecl install xdebug-2.7.0alpha1
+    pecl install xdebug-2.7.0beta1
     docker-php-ext-enable xdebug
 fi
