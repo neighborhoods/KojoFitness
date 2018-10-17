@@ -27,4 +27,6 @@
  # Delete the Kōjō Tables and clear redis
  docker-compose exec kojo_fitness bash -c 'cd Function44; ./vendor/bin/kojo db:tear_down:uninstall $PWD/Environment/';
  docker-compose exec redis redis-cli flushall;
+ # The sample table will remain in kojo_fitness, but it will get deleted next time a FitnessFunction is run
+ rm data/pgsql/dumps/kojo_fitness.sql
  ```
