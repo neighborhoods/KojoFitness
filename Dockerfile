@@ -26,5 +26,4 @@ RUN bash docker/build.sh \
     --composer-install ${COMPOSER_INSTALL}
 
 #CMD ["php-fpm"]
-
-EXPOSE 9020
+#ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/Function40/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/Function40/src/V1/Environment/"]
