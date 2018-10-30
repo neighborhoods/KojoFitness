@@ -45,13 +45,21 @@ class Worker implements WorkerInterface
         $workerDelegate->setV1WorkerQueueMessage($this->getV1WorkerQueue()->getNextMessage());
 
         $this->fireEvent('working');
-        if (extension_loaded('newrelic')) {
-            newrelic_end_transaction();
-            newrelic_start_transaction(ini_get("newrelic.appname")); // start recording a new transaction
-            newrelic_name_transaction(self::JOB_TYPE_CODE);
+
+        $newRelic = $this->getApiV1WorkerService()->getNewRelic();
+        $newRelicAppName = ini_get('newrelic.appname');
+
+        if ($newRelicAppName !== false) {
+            $newRelic->setApplicationName($newRelicAppName);
         }
 
+        $newRelic
+            ->nameTransaction(self::JOB_TYPE_CODE)
+            ->startTransaction();
+
         $workerDelegate->businessLogic();
+
+        $newRelic->endTransaction();
 
         return $this;
     }
