@@ -1,5 +1,11 @@
 # Defines the fitness of Kōjō for
  - Gaining more control over DLCs by specifying a maximum number of iterations they may run before returning control to Kōjō
+ The flow for this usecase is:
+1. Start Kojo, and see working events
+2. In the database set `is_enabled` to false
+3. Wait for <100 messages to be processed as `working` events since [MAX_ITERATIONS](https://github.com/neighborhoods/KojoFitness/blob/4.x/Function43/src/V1/Worker.php#L23) is set to 100.
+4. Then you'll see a `complete_success` message and no more `working` messages.
+5. Check the `local-bwilson` SQS queue, there should still be messages. This indicates that Kojo realized that `is_enabled` has been modified and stopped, even though there were more messages to be processed.
  
  ## Setup Function43
  
