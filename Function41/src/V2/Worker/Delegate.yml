@@ -1,5 +1,0 @@
-services:
-  neighborhoods.v2.worker.delegate:
-    class: Neighborhoods\KojoFitnessFunction41\V2\Worker\Delegate
-    public: false
-    shared: false
