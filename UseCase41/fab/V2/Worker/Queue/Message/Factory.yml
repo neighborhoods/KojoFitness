@@ -1,0 +1,7 @@
+services:
+  neighborhoods.v2.worker.queue.message.factory:
+    class: Neighborhoods\KojoFitnessUseCase41\V2\Worker\Queue\Message\Factory
+    public: false
+    shared: true
+    calls:
+    - [setV2WorkerQueueMessage, ['@v2.worker.queue.message']]
