@@ -1,8 +1,0 @@
-services:
-  Neighborhoods\KojoFitnessFunction41\V2\WorkerInterface:
-    class: Neighborhoods\KojoFitnessFunction41\V2\Worker
-    public: true
-    shared: false
-    calls:
-    - [setV2WorkerDelegateRepository, ['@neighborhoods.v2.worker.delegate.repository']]
-    - [setV2WorkerQueue, ['@neighborhoods.v2.worker.queue']]

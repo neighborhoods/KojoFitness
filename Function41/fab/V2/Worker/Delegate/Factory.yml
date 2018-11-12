@@ -1,7 +1,0 @@
-services:
-  neighborhoods.v2.worker.delegate.factory:
-    class: Neighborhoods\KojoFitnessFunction41\V2\Worker\Delegate\Factory
-    public: false
-    shared: true
-    calls:
-    - [setV2WorkerDelegate, ['@neighborhoods.v2.worker.delegate']]
