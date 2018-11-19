@@ -19,7 +19,7 @@ $jobCreator->setCode(Neighborhoods\KojoFitnessUseCase45\V1\Worker::JOB_TYPE_CODE
     ->setCronExpression('* * * * *')
     ->setCanWorkInParallel(false)
     ->setDefaultImportance(10)
-    ->setScheduleLimit(50)
+    ->setScheduleLimit(1)
     ->setScheduleLimitAllowance(1)
     ->setIsEnabled(true)
     ->setAutoCompleteSuccess(false)
