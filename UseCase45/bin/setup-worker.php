@@ -17,7 +17,7 @@ $jobCreator->setCode(Neighborhoods\KojoFitnessUseCase45\V1\Worker::JOB_TYPE_CODE
     ->setWorkerMethod('start')
     ->setName('Retry Requester')
     ->setCronExpression('* * * * *')
-    ->setCanWorkInParallel(false)
+    ->setCanWorkInParallel(true)
     ->setDefaultImportance(10)
     ->setScheduleLimit(50)
     ->setScheduleLimitAllowance(1)
