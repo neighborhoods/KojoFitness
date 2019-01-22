@@ -35,7 +35,7 @@ services:
     logging:
       driver: "fluentd"
       options:
-        fluentd-address: "docker.for.mac.localhost:24224"
+        fluentd-address: "docker.for.mac.localhost:24225"
         tag: "kojo_fitness"
 
 
@@ -47,8 +47,8 @@ services:
     volumes:
       - ./docker/fluentd/conf:/fluentd/etc
     ports:
-      - "24224:24224"
-      - "24224:24224/udp"
+      - "24225:24224"
+      - "24225:24224/udp"
     logging:
       driver: "json-file"
       options:
