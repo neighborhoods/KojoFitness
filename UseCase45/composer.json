@@ -15,7 +15,7 @@
   },
   "require": {
     "php": ">=7.1",
-    "neighborhoods/kojo": "^4.0.0",
+    "neighborhoods/kojo": "dev-feature/json-serializable-logger-context",
     "aws/aws-sdk-php": "2.*"
   },
   "require-dev": {

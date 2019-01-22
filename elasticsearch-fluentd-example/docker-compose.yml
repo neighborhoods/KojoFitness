@@ -1,0 +1,61 @@
+version: '2'
+
+services:
+
+  ### Mount Applications ######################################
+
+  applications:
+    image: tianon/true
+    volumes:
+    - ../../KojoFitness/:/var/www/html/kojo_fitness_logging.neighborhoods.com
+
+    ### Kōjō Fitness Container (php-fpm) #########################
+
+  kojo_fitness_logging:
+    build:
+      context: .
+      args:
+      - INSTALL_XDEBUG=false
+      - COMPOSER_INSTALL=false
+    volumes:
+    # Shares AWS credentials to the docker container
+    - $HOME/.aws:/root/.aws
+    - $HOME/.aws:/var/www/.aws
+    volumes_from:
+    - applications
+    env_file:
+      - ../kojo.env
+    environment:
+      DATABASE_HOST: "docker.for.mac.localhost"
+      REDIS_HOST: "docker.for.mac.localhost"
+      REDIS_PORT: 6380
+      KOJO_REDIS_HOST: "docker.for.mac.localhost"
+      KOJO_REDIS_PORT: 6380
+#    logging:
+#      driver: "fluentd"
+#      options:
+#        fluentd-address: "docker.for.mac.localhost:24224"
+#        tag: "kojo_fitness"
+
+
+
+### Fluentd Logging Container ###############################################
+
+  fluentd:
+    build: ./docker/fluentd
+    volumes:
+      - ./docker/fluentd/conf:/fluentd/etc
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: "5"
+
+### Network Setup ###########################################
+
+networks:
+  default:
+    driver: bridge
