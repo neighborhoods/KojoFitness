@@ -1,6 +1,6 @@
 FROM neighborhoods/php-fpm-phalcon:php7.2_phalcon3.4
 RUN apt-get update -y && apt-get install -y unzip procps
-ARG PROJECT_NAME=kojo_fitness_logging
+ARG PROJECT_NAME=kojo_fitness
 
 # COMPOSER_TOKEN can also be passed via the COMPOSER_GITHUB_TOKEN file
 ARG COMPOSER_TOKEN=placeholder_token_you_must_replace_via_args_in_compose_file
@@ -25,4 +25,4 @@ RUN bash docker/build.sh \
     --xdebug ${INSTALL_XDEBUG} \
     --composer-install ${COMPOSER_INSTALL}
 
-ENTRYPOINT ["/var/www/html/kojo_fitness_logging.neighborhoods.com/UseCase40/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness_logging.neighborhoods.com/UseCase40/src/V1/Environment/"]
+ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/UseCase40/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase40/src/V1/Environment/"]
