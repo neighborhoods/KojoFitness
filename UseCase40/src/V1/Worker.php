@@ -77,12 +77,10 @@ class Worker implements WorkerInterface
 
     protected function fireEvent(string $event) : WorkerInterface
     {
-        $context = ['job_type' => self::JOB_TYPE_CODE, 'event_type' => $event];
-
         if (extension_loaded('newrelic')) {
-            newrelic_record_custom_event($event, $context);
+            newrelic_record_custom_event($event, ['job_type' => self::JOB_TYPE_CODE]);
         }
-        $this->getApiV1WorkerService()->getLogger()->notice($event, $context);
+        $this->getApiV1WorkerService()->getLogger()->info($event, ['job_type' => self::JOB_TYPE_CODE]);
 
         return $this;
     }
