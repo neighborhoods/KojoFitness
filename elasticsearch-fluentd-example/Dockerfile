@@ -25,4 +25,4 @@ RUN bash docker/build.sh \
     --xdebug ${INSTALL_XDEBUG} \
     --composer-install ${COMPOSER_INSTALL}
 
-ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/UseCase40/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase40/src/V1/Environment/"]
+ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/src/V1/Environment/"]

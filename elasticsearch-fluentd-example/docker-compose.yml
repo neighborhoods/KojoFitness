@@ -1,14 +1,6 @@
-version: '2'
+version: '3'
 
 services:
-
-  ### Mount Applications ######################################
-
-  applications:
-    image: tianon/true
-    volumes:
-    - ../../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
-
     ### Kōjō Fitness Container (php-fpm) #########################
 
   kojo_fitness:
@@ -21,10 +13,13 @@ services:
     # Shares AWS credentials to the docker container
     - $HOME/.aws:/root/.aws
     - $HOME/.aws:/var/www/.aws
-    volumes_from:
-    - applications
+    - ../../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
     env_file:
       - ../kojo.env
+    networks:
+      - back-tier
+    depends_on:
+      - fluentd
     environment:
       DATABASE_HOST: "docker.for.mac.localhost"
       DATABASE_PORT: 5433
@@ -55,8 +50,105 @@ services:
         max-size: 100m
         max-file: "5"
 
-### Network Setup ###########################################
+  prometheus:
+    image: prom/prometheus:v2.1.0
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    links:
+      - alertmanager:alertmanager
+    networks:
+      - back-tier
+    restart: always
+  #    deploy:
+  #      placement:
+  #        constraints:
+  #          - node.hostname == ${HOSTNAME}
+
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    networks:
+      - back-tier
+    restart: always
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+  #    deploy:
+  #      placement:
+  #        constraints:
+  #          - node.hostname == ${HOSTNAME}
+
+  grafana:
+    image: grafana/grafana
+    user: "104"
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - back-tier
+      - front-tier
+    restart: always
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - back-tier
+  elasticsearch2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch2
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata2:/usr/share/elasticsearch/data
+    networks:
+      - back-tier
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+  esdata1:
+    driver: local
+  esdata2:
+    driver: local
 
 networks:
-  default:
-    driver: bridge
+  front-tier:
+  back-tier:
