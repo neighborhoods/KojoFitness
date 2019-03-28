@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
     ### Kōjō Fitness Container (php-fpm) #########################
@@ -145,6 +145,7 @@ services:
     networks:
       - back-tier
 
+### Volumes Setup ###########################################
 volumes:
   prometheus_data: {}
   grafana_data: {}

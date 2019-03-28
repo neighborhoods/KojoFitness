@@ -9,7 +9,7 @@ $client = \Aws\Sqs\SqsClient::factory(
     ['region' => 'us-east-1']
 );
 
-$totalNumberOfMessagesToSend = 500;
+$totalNumberOfMessagesToSend = 5000;
 $messageCount = 0;
 while ($messageCount !== $totalNumberOfMessagesToSend) {
     $client->sendMessage(array(
