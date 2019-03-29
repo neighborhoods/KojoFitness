@@ -9,3 +9,5 @@ parameters:
   neighborhoods.kojo.environment.parameters.database_port: '%env(DATABASE_PORT)%'
   neighborhoods.kojo.environment.parameters.database_host: '%env(DATABASE_HOST)%'
   neighborhoods.kojo.environment.parameters.database_name: '%env(DATABASE_NAME)%'
+  # slow down the creation of new jobs after panicking while debugging
+  process_pool_strategy.max_alarm_time: 1000000000
