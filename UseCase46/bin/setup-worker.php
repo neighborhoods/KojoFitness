@@ -12,14 +12,14 @@ $finder = new Finder();
 $finder->name('*.yml');
 $finder->files()->in($discoverableDirectories);
 $jobCreator = (new Job\Type\Service())->addYmlServiceFinder($finder)->getNewJobTypeRegistrar();
-$jobCreator->setCode('protean_dlcp_example')
+$jobCreator->setCode('complex_logging_structure')
     ->setWorkerClassUri(\Neighborhoods\KojoFitnessUseCase46\V1\Worker\Facade::class)
     ->setWorkerMethod('start')
     ->setName('Protean DLCP Example')
     ->setCronExpression('* * * * *')
     ->setCanWorkInParallel(true)
     ->setDefaultImportance(10)
-    ->setScheduleLimit(50)
+    ->setScheduleLimit(1)
     ->setScheduleLimitAllowance(1)
     ->setIsEnabled(true)
     ->setAutoCompleteSuccess(false)

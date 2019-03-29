@@ -10,7 +10,7 @@ class Worker implements WorkerInterface
     use Worker\Delegate\Repository\AwareTrait;
     use Api\V1\Worker\Service\AwareTrait;
     use Worker\Queue\AwareTrait;
-    public const JOB_TYPE_CODE = 'protean_dlcp_example';
+    public const JOB_TYPE_CODE = 'complex_logging_structure';
 
     public function work() : WorkerInterface
     {
@@ -45,21 +45,13 @@ class Worker implements WorkerInterface
         $workerDelegate->setV1WorkerQueueMessage($this->getV1WorkerQueue()->getNextMessage());
 
         $this->fireEvent('working');
-
-        $newRelic = $this->getApiV1WorkerService()->getNewRelic();
-        $newRelicAppName = ini_get('newrelic.appname');
-
-        if ($newRelicAppName !== false) {
-            $newRelic->setApplicationName($newRelicAppName);
+        if (extension_loaded('newrelic')) {
+            newrelic_end_transaction();
+            newrelic_start_transaction(ini_get("newrelic.appname")); // start recording a new transaction
+            newrelic_name_transaction(self::JOB_TYPE_CODE);
         }
 
-        $newRelic
-            ->nameTransaction(self::JOB_TYPE_CODE)
-            ->startTransaction();
-
         $workerDelegate->businessLogic();
-
-        $newRelic->endTransaction();
 
         return $this;
     }
@@ -77,12 +69,10 @@ class Worker implements WorkerInterface
 
     protected function fireEvent(string $event) : WorkerInterface
     {
-        $context = ['job_type' => self::JOB_TYPE_CODE, 'event_type' => $event];
-
         if (extension_loaded('newrelic')) {
-            newrelic_record_custom_event($event, $context);
+            newrelic_record_custom_event($event, ['job_type' => self::JOB_TYPE_CODE]);
         }
-        $this->getApiV1WorkerService()->getLogger()->notice($event, $context);
+        $this->getApiV1WorkerService()->getLogger()->info($event, ['job_type' => self::JOB_TYPE_CODE]);
 
         return $this;
     }
