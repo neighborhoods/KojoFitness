@@ -42,6 +42,7 @@ class Worker implements WorkerInterface
     protected function _delegateWork() : WorkerInterface
     {
         $workerDelegate = $this->getV1WorkerDelegateRepository()->getV1NewWorkerDelegate();
+        $workerDelegate->setApiV1WorkerService($this->getApiV1WorkerService());
         $workerDelegate->setV1WorkerQueueMessage($this->getV1WorkerQueue()->getNextMessage());
 
         $this->fireEvent('working');

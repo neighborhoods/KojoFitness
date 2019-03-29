@@ -37,6 +37,7 @@
   gsub("critical", "\033[5;101m&\033[0m"); 
   gsub("Panicking", "\033[5;95m&\033[0m"); 
   gsub("TypeError", "\033[5;102m&\033[0m"); 
+  gsub("LogicException", "\033[5;102m&\033[0m"); 
   print }';
   
  # After you see "working" events stop and a few "complete_success" then all messages have been deleted. Press ctrl+c

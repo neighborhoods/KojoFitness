@@ -2,6 +2,6 @@ services:
   neighborhoods.v1.worker.delegate.repository:
     class: Neighborhoods\KojoFitnessUseCase46\V1\Worker\Delegate\Repository
     public: false
-    shared: true
+    shared: flase
     calls:
       - [setV1WorkerDelegateFactory, ['@neighborhoods.v1.worker.delegate.factory']]
