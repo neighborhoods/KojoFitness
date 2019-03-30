@@ -78,3 +78,17 @@ scrape_configs:
 
     static_configs:
       - targets: ['fluentd:24231']
+
+  - job_name: 'prometheussql'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    dns_sd_configs:
+    - names:
+      - 'tasks.prometheussql'
+      type: 'A'
+      port: 8080
+
+    static_configs:
+      - targets: ['prometheussql:8080']

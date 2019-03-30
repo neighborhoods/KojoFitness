@@ -1,0 +1,15 @@
+- kojo_num_panicked_jobs:
+    # Name of the driver to use.
+    driver: postgresql
+
+    # Connection information.
+    connection:
+      host: docker.for.mac.localhost
+      port: 5433
+      user: kojo
+      password: kojofitness
+      database: kojo_fitness
+      sslmode: disable
+    sql: >
+      select count(*) cnt from kojo_job where assigned_state = 'panicked'
+    data-field: cnt

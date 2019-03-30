@@ -170,6 +170,24 @@ services:
         max_attempts: 3
         window: 120s
 
+  sqlagent:
+    image: dbhi/sql-agent
+    networks:
+      - back-tier
+
+
+  prometheussql:
+    image: dbhi/prometheus-sql
+    links:
+      - sqlagent:sqlagent
+    ports:
+      - 8080:8080
+    networks:
+      - back-tier
+    volumes:
+      - ./prometheussql/queries.yml:/queries.yml
+      - ./prometheussql/config.yml:/prometheus-sql.yml
+
 ### Volumes Setup ###########################################
 volumes:
   prometheus_data: {}
