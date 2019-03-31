@@ -25,3 +25,18 @@ $jobCreator->setCode('complex_logging_structure')
     ->setAutoCompleteSuccess(false)
     ->setAutoDeleteIntervalDuration('PT0S');
 $jobCreator->save();
+
+$jobCreator = (new Job\Type\Service())->addYmlServiceFinder($finder)->getNewJobTypeRegistrar();
+$jobCreator->setCode('same_job_different_code')
+    ->setWorkerClassUri(\Neighborhoods\KojoFitnessUseCase46\V1\Worker\Facade::class)
+    ->setWorkerMethod('start')
+    ->setName('Protean DLCP Example')
+    ->setCronExpression('* * * * *')
+    ->setCanWorkInParallel(true)
+    ->setDefaultImportance(10)
+    ->setScheduleLimit(1)
+    ->setScheduleLimitAllowance(1)
+    ->setIsEnabled(true)
+    ->setAutoCompleteSuccess(false)
+    ->setAutoDeleteIntervalDuration('PT0S');
+$jobCreator->save();

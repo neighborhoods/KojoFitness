@@ -1,15 +1,11 @@
-- kojo_num_panicked_jobs:
-    # Name of the driver to use.
-    driver: postgresql
-
-    # Connection information.
-    connection:
-      host: docker.for.mac.localhost
-      port: 5433
-      user: kojo
-      password: kojofitness
-      database: kojo_fitness
-      sslmode: disable
+- kojo_num_panicked_jobs_by_job:
     sql: >
-      select count(*) cnt from kojo_job where assigned_state = 'panicked'
-    data-field: cnt
+      select type_code,count(*) total
+      from kojo_job
+      where assigned_state = 'panicked'
+      group by type_code;
+    data-field: total
+- kojo_num_assigned_state_by_job:
+    sql: >
+      select type_code, assigned_state, count(1) total from kojo_job group by assigned_state, type_code
+    data-field: total

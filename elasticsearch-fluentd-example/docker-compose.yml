@@ -177,7 +177,9 @@ services:
 
 
   prometheussql:
+    build: prometheussql
     image: dbhi/prometheus-sql
+    command: -service http://sqlagent:5000 -config prometheus-sql.yml
     links:
       - sqlagent:sqlagent
     ports:
