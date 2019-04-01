@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 2,
-  "iteration": 1554087843747,
+  "iteration": 1554092869224,
   "links": [],
   "panels": [
     {
@@ -531,7 +530,9 @@
   "refresh": "5s",
   "schemaVersion": 18,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "elasticsearch"
+  ],
   "templating": {
     "list": [
       {
@@ -701,5 +702,5 @@
   "timezone": "",
   "title": "Kōjō Fitness ElasticSearch",
   "uid": "RaUA8R6iz",
-  "version": 9
+  "version": 1
 }

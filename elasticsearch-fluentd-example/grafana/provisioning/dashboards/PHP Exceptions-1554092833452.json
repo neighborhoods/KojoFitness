@@ -14,9 +14,8 @@
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
-  "id": 11,
-  "iteration": 1554090130237,
+  "graphTooltip": 1,
+  "iteration": 1554092441793,
   "links": [],
   "panels": [
     {
@@ -186,6 +185,10 @@
         {
           "text": "context.exception.previous.message",
           "value": "context.exception.previous.message"
+        },
+        {
+          "text": "context.exception.file",
+          "value": "context.exception.file"
         }
       ],
       "datasource": "Elasticsearch",
@@ -197,6 +200,7 @@
         "y": 5
       },
       "id": 2,
+      "links": [],
       "pageSize": 20,
       "scroll": true,
       "showHeader": true,
@@ -247,14 +251,16 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Panel Title",
+      "title": "Exceptions",
       "transform": "json",
       "type": "table"
     }
   ],
   "schemaVersion": 18,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "elasticsearch"
+  ],
   "templating": {
     "list": [
       {
@@ -424,5 +430,5 @@
   "timezone": "",
   "title": "PHP Exceptions",
   "uid": "6WmsXt6iz",
-  "version": 6
+  "version": 1
 }
