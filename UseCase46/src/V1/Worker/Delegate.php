@@ -29,13 +29,13 @@ class Delegate implements DelegateInterface
                 $this->getV1WorkerQueueMessage()->delete();
                 $this->getApiV1WorkerService()->getLogger()->alert('Deleted the message boss!', $context);
                 break;
-            case (61 <= $i) && ($i <= 80):
-                $this->onlyTakesIntegers('Not very lucky');
-                break;
-            case (81 <= $i) && ($i <= 95):
-                throw new \LogicException('That was not very logical');
-                break;
-            case (95 <= $i) && ($i <= 100):
+//            case (61 <= $i) && ($i <= 80):
+//                $this->onlyTakesIntegers('Not very lucky');
+//                break;
+//            case (81 <= $i) && ($i <= 95):
+//                throw new \LogicException('That was not very logical');
+//                break;
+            case (61 <= $i) && ($i <= 100):
                 $this->createDeepPreviousExceptionChain();
                 break;
             default:
