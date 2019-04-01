@@ -19,11 +19,11 @@ $jobCreator->setCode('complex_logging_structure')
     ->setCronExpression('* * * * *')
     ->setCanWorkInParallel(true)
     ->setDefaultImportance(10)
-    ->setScheduleLimit(50)
+    ->setScheduleLimit(10)
     ->setScheduleLimitAllowance(1)
     ->setIsEnabled(true)
     ->setAutoCompleteSuccess(false)
-    ->setAutoDeleteIntervalDuration('PT0S');
+    ->setAutoDeleteIntervalDuration('PT60S');
 $jobCreator->save();
 
 $jobCreator = (new Job\Type\Service())->addYmlServiceFinder($finder)->getNewJobTypeRegistrar();
@@ -34,9 +34,9 @@ $jobCreator->setCode('same_job_different_code')
     ->setCronExpression('* * * * *')
     ->setCanWorkInParallel(true)
     ->setDefaultImportance(10)
-    ->setScheduleLimit(50)
+    ->setScheduleLimit(10)
     ->setScheduleLimitAllowance(1)
     ->setIsEnabled(true)
     ->setAutoCompleteSuccess(false)
-    ->setAutoDeleteIntervalDuration('PT0S');
+    ->setAutoDeleteIntervalDuration('PT60S');
 $jobCreator->save();
