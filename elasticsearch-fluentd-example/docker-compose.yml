@@ -65,7 +65,7 @@ services:
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
-      - 9090:9090
+      - 9091:9090
     links:
       - alertmanager:alertmanager
     networks:
@@ -79,7 +79,7 @@ services:
   alertmanager:
     image: prom/alertmanager
     ports:
-      - 9093:9093
+      - 9094:9093
     volumes:
       - ./alertmanager/:/etc/alertmanager/
     networks:
@@ -99,7 +99,7 @@ services:
     depends_on:
       - prometheus
     ports:
-      - 3000:3000
+      - 3001:3000
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
@@ -125,7 +125,7 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - 9201:9200
     networks:
       - back-tier
   elasticsearch2:
@@ -151,7 +151,7 @@ services:
       SERVER_NAME: localhost
       ELASTICSEARCH_URL: http://elasticsearch:9200/
     ports:
-      - 5601:5601
+      - 5602:5601
     networks:
       - back-tier
       - front-tier
@@ -182,8 +182,6 @@ services:
     command: -service http://sqlagent:5000 -config prometheus-sql.yml
     links:
       - sqlagent:sqlagent
-    ports:
-      - 8080:8080
     networks:
       - back-tier
     volumes:
