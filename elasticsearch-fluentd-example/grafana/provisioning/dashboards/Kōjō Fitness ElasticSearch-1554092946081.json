@@ -23,7 +23,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 8,
@@ -140,7 +140,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 8,
@@ -254,7 +254,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 8,
@@ -373,7 +373,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 8,
@@ -624,7 +624,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Elasticsearch",
+        "datasource": "Elasticsearch (kojo-fitness)",
         "definition": "{\"find\":\"terms\",\"field\":\"context.job_type.keyword\"}",
         "hide": 0,
         "includeAll": true,
@@ -649,7 +649,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Elasticsearch",
+        "datasource": "Elasticsearch (kojo-fitness)",
         "definition": "{\"find\":\"terms\",\"field\":\"context.event_type.keyword\"}",
         "hide": 0,
         "includeAll": true,

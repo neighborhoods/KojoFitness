@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 6,
+  "id": 7,
+  "iteration": 1554162501449,
   "links": [],
   "panels": [
     {
@@ -191,6 +192,129 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Elasticsearch (fluentd)",
+      "description": "fluent.warn events are usually a sign that data is being dropped due to \"Fluent::Plugin::Parser::ParserError: pattern not match with data\"",
+      "fill": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "paceLength": 10,
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "fluent.info",
+          "color": "#73BF69"
+        },
+        {
+          "alias": "fluent.warn",
+          "color": "#FF9830"
+        }
+      ],
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "@log_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Fluentd Log Events",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "fill": 0,
       "gridPos": {
         "h": 9,
@@ -269,6 +393,84 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "columns": [
+        {
+          "text": "@log_name",
+          "value": "@log_name"
+        },
+        {
+          "text": "message",
+          "value": "message"
+        },
+        {
+          "text": "@timestamp",
+          "value": "@timestamp"
+        }
+      ],
+      "datasource": "Elasticsearch (fluentd)",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 8,
+      "links": [],
+      "pageSize": 1,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {
+                "size": 5
+              },
+              "type": "raw_document"
+            }
+          ],
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Panel Title",
+      "transform": "json",
+      "type": "table"
     }
   ],
   "refresh": "5s",
@@ -278,7 +480,17 @@
     "prometheus"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "datasource": "Elasticsearch (fluentd)",
+        "filters": [],
+        "hide": 0,
+        "label": "",
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
   },
   "time": {
     "from": "now-15m",
@@ -310,7 +522,7 @@
     ]
   },
   "timezone": "",
-  "title": "Fluentd Stats",
-  "uid": "FhJ8h26mz",
-  "version": 3
+  "title": "Fluentd Stats and Errors",
+  "uid": "EvMxcAeik",
+  "version": 5
 }

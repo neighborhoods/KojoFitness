@@ -23,7 +23,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -146,7 +146,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -272,7 +272,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -397,7 +397,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -525,7 +525,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -650,7 +650,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -778,7 +778,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -903,7 +903,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Elasticsearch",
+      "datasource": "Elasticsearch (kojo-fitness)",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -1040,7 +1040,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Elasticsearch",
+        "datasource": "Elasticsearch (kojo-fitness)",
         "definition": "{\"find\":\"terms\",\"field\":\"context.nested_object.random_letters.keyword\"}",
         "hide": 0,
         "includeAll": true,
@@ -1148,7 +1148,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Elasticsearch",
+        "datasource": "Elasticsearch (kojo-fitness)",
         "definition": "{\"find\":\"terms\",\"field\":\"context.nested_object.random_word.keyword\"}",
         "hide": 0,
         "includeAll": true,
