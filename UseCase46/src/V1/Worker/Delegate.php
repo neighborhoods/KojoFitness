@@ -13,9 +13,9 @@ class Delegate implements DelegateInterface
 
     public function businessLogic() : DelegateInterface
     {
-        $i = random_int(1, 100);
+        $i = random_int(0, 100);
         switch (true) {
-            case  (1 <= $i) && ($i <= 50):
+            case  (1 <= $i) && ($i <= 80):
                 $context = [
                     'event_type' => 'task_status',
                     'top_level_status' => 'success',
@@ -29,10 +29,10 @@ class Delegate implements DelegateInterface
                 $this->getV1WorkerQueueMessage()->delete();
                 $this->getApiV1WorkerService()->getLogger()->alert('Deleted the message boss!', $context);
                 break;
-            case (51 <= $i) && ($i <= 60):
+            case (81 <= $i) && ($i <= 90):
                 $this->onlyTakesIntegers('Not very lucky');
                 break;
-            case (61 <= $i) && ($i <= 100):
+            case (91 <= $i) && ($i <= 100):
                 throw new \LogicException('That was not very logical');
                 break;
             default:
