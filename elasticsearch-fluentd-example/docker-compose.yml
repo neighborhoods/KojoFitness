@@ -38,9 +38,9 @@ services:
 ### Fluentd Logging Container ###############################################
 
   fluentd:
-    build: ./docker/fluentd
+    build: fluentd
     volumes:
-      - ./docker/fluentd/conf:/fluentd/etc
+      - ./fluentd/conf:/fluentd/etc
     ports:
       - "24225:24224"
       - "24225:24224/udp"

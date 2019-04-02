@@ -13,7 +13,7 @@ class Delegate implements DelegateInterface
 
     public function businessLogic() : DelegateInterface
     {
-        $i = random_int(1, 100);
+        $i = random_int(1, 60);
         switch (true) {
             case  (1 <= $i) && ($i <= 60):
                 $context = [
