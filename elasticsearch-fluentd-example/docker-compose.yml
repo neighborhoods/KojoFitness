@@ -54,6 +54,18 @@ services:
         max-size: 100m
         max-file: "5"
 
+  fluentdtest:
+    build: fluentd
+    volumes:
+      - ./fluentd/test-conf:/fluentd/etc
+    networks:
+      - back-tier
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: "5"
+
   prometheus:
     image: prom/prometheus:v2.1.0
     volumes:
