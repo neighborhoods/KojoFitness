@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1554092156331,
+  "iteration": 1554223357796,
   "links": [],
   "panels": [
     {
@@ -250,7 +250,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -301,7 +301,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1554092156331,
+      "repeatIteration": 1554223357796,
       "repeatPanelId": 2,
       "scopedVars": {
         "letters": {
@@ -426,7 +426,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1554092156331,
+      "repeatIteration": 1554223357796,
       "repeatPanelId": 6,
       "scopedVars": {
         "letters": {
@@ -503,7 +503,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -554,7 +554,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1554092156331,
+      "repeatIteration": 1554223357796,
       "repeatPanelId": 2,
       "scopedVars": {
         "letters": {
@@ -679,7 +679,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1554092156331,
+      "repeatIteration": 1554223357796,
       "repeatPanelId": 6,
       "scopedVars": {
         "letters": {
@@ -756,7 +756,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -807,7 +807,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1554092156331,
+      "repeatIteration": 1554223357796,
       "repeatPanelId": 2,
       "scopedVars": {
         "letters": {
@@ -932,7 +932,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1554092156331,
+      "repeatIteration": 1554223357796,
       "repeatPanelId": 6,
       "scopedVars": {
         "letters": {
@@ -1009,7 +1009,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1027,6 +1027,7 @@
       }
     }
   ],
+  "refresh": "5s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
