@@ -162,13 +162,6 @@ services:
         hard: -1
     cap_add:
       - ALL
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
 
   sqlagent:
     image: dbhi/sql-agent
