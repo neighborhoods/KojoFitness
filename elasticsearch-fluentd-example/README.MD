@@ -2,7 +2,7 @@ This example setups the following services
 - Grafana: http://localhost:3001
   - username `admin` and the password `foobar`
 - Kibana: http://localhost:5602
-- Prometheus: http://localhost:9001
+- Prometheus: http://localhost:9091/graph
 - AlertManager: http://localhost:9094
 - ElasticSearch: http://localhost:9201
   
