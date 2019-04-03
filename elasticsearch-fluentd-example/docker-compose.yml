@@ -188,6 +188,8 @@ services:
       - sqlagent:sqlagent
     networks:
       - back-tier
+    ports:
+      - 3003:8080
     volumes:
       - ./prometheussql/queries.yml:/queries.yml
       - ./prometheussql/config.yml:/prometheus-sql.yml
