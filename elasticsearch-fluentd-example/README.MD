@@ -1,3 +1,11 @@
+This example setups the following services
+- Grafana: http://localhost:3001
+  - username `admin` and the password `foobar`
+- Kibana: http://localhost:5602
+- Prometheus: http://localhost:9001
+- AlertManager: http://localhost:9094
+- ElasticSearch: http://localhost:9201
+  
 1. Start the base docker containers in the `KojoFitnes` directory
 
 ```bash
