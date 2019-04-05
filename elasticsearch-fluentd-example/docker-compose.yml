@@ -58,6 +58,9 @@ services:
     build: fluentd
     volumes:
       - ./fluentd/test-conf:/fluentd/etc
+    ports:
+      - "24232:24231"
+      - "24232:24231/udp"
     networks:
       - back-tier
     logging:
