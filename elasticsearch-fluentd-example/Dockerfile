@@ -12,6 +12,8 @@ ENV IS_DOCKER=1
 
 RUN usermod -u 1000 www-data
 RUN mkdir -p $PROJECT_DIR
+RUN mkdir -p /var/log/kojo
+
 WORKDIR $PROJECT_DIR
 
 COPY . $PROJECT_DIR
@@ -25,4 +27,4 @@ RUN bash docker/build.sh \
     --xdebug ${INSTALL_XDEBUG} \
     --composer-install ${COMPOSER_INSTALL}
 
-ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/src/V1/Environment/"]
+CMD ["/bin/sh", "-c", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/vendor/bin/kojo process:pool:server:start /var/www/html/kojo_fitness.neighborhoods.com/UseCase46/src/V1/Environment/ 1>>/var/log/kojo/stdout.log 2>>/var/log/kojo/stderr.log"]

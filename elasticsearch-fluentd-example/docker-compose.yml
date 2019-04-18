@@ -7,7 +7,7 @@ services:
     build:
       context: .
       args:
-      - INSTALL_XDEBUG=true
+      - INSTALL_XDEBUG=false
       - COMPOSER_INSTALL=false
     volumes:
     # Shares AWS credentials to the docker container
@@ -27,11 +27,6 @@ services:
       REDIS_PORT: 6380
       KOJO_REDIS_HOST: "docker.for.mac.localhost"
       KOJO_REDIS_PORT: 6380
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "docker.for.mac.localhost:24225"
-        tag: "kojo_fitness"
 
 
 
