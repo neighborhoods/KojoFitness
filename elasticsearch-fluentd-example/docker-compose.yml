@@ -14,6 +14,7 @@ services:
     - $HOME/.aws:/root/.aws
     - $HOME/.aws:/var/www/.aws
     - ../../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
+    - kojo_logs:/var/log/kojo
     env_file:
       - ../kojo.env
     networks:
@@ -36,6 +37,7 @@ services:
     build: fluentd
     volumes:
       - ./fluentd/conf:/fluentd/etc
+      - kojo_logs:/var/log/kojo
     ports:
       - "24225:24224"
       - "24225:24224/udp"
@@ -199,6 +201,8 @@ volumes:
   esdata1:
     driver: local
   esdata2:
+    driver: local
+  kojo_logs:
     driver: local
 
 networks:
