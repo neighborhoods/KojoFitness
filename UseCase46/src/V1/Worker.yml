@@ -5,4 +5,3 @@ services:
     shared: false
     calls:
       - [setV1WorkerDelegateRepository, ['@neighborhoods.v1.worker.delegate.repository']]
-      - [setV1WorkerQueue, ['@neighborhoods.v1.worker.queue']]

@@ -10,7 +10,5 @@ interface DelegateInterface
 {
     public function setApiV1WorkerService(ServiceInterface $apiV1WorkerService);
 
-    public function setV1WorkerQueueMessage(MessageInterface $workerQueueMessage);
-
     public function businessLogic(): DelegateInterface;
 }

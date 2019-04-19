@@ -63,7 +63,7 @@ datasources:
   # <string> database user, if used
   user:
   # <string> database name, if used
-  database: '[kojo-fitness-v1.0.0-]YYYYMMDD'
+  database: '[kojo-fitness-v2.0.0-]YYYYMMDD'
   # <bool> enable/disable basic auth
   basicAuth:
   # <string> basic auth username

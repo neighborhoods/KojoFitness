@@ -10,9 +10,6 @@ services:
       - INSTALL_XDEBUG=false
       - COMPOSER_INSTALL=false
     volumes:
-    # Shares AWS credentials to the docker container
-    - $HOME/.aws:/root/.aws
-    - $HOME/.aws:/var/www/.aws
     - ../../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
     - kojo_logs:/var/log/kojo
     env_file:
@@ -45,6 +42,8 @@ services:
       - "24231:24231/udp"
     networks:
       - back-tier
+    depends_on:
+      - elasticsearch
     logging:
       driver: "json-file"
       options:
@@ -129,7 +128,7 @@ services:
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
     ulimits:
       memlock:
         soft: -1

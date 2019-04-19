@@ -9,27 +9,27 @@ class Worker implements WorkerInterface
 {
     use Worker\Delegate\Repository\AwareTrait;
     use Api\V1\Worker\Service\AwareTrait;
-    use Worker\Queue\AwareTrait;
     public const JOB_TYPE_CODE = 'complex_logging_structure';
+    public const MAX_ITERATIONS = 5;
 
     public function work() : WorkerInterface
     {
         $this->fireEvent('new_worker');
-        if ($this->getApiV1WorkerService()->getTimesCrashed() === 0 && $this->getV1WorkerQueue()->hasNextMessage()) {
-            // Wait for one message to become available.
-            $this->fireEvent('message_received');
-            // Schedule another kōjō job of the same type.
-            $this->_scheduleNextJob();
 
-            // Delegate the work for the first message.
+        // Schedule another kōjō job of the same type.
+        $this->_scheduleNextJob();
+
+        // Delegate the work for the first message.
+        $this->_delegateWork();
+
+        // Delegate the work until the observed Queue is empty.
+        $iterationCount = 1;
+        while ($iterationCount < self::MAX_ITERATIONS) {
             $this->_delegateWork();
-
-            // Delegate the work until the observed Queue is empty.
-            while ($this->getV1WorkerQueue()->hasNextMessage()) {
-                $this->_delegateWork();
-            }
-
+            $iterationCount++;
         }
+
+
 
         // Tell Kōjō that we are done and all is well.
         $this->fireEvent('complete_success');
@@ -43,7 +43,6 @@ class Worker implements WorkerInterface
     {
         $workerDelegate = $this->getV1WorkerDelegateRepository()->getV1NewWorkerDelegate();
         $workerDelegate->setApiV1WorkerService($this->getApiV1WorkerService());
-        $workerDelegate->setV1WorkerQueueMessage($this->getV1WorkerQueue()->getNextMessage());
 
         $this->fireEvent('working');
         if (extension_loaded('newrelic')) {

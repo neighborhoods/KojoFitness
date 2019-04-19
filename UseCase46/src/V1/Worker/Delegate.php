@@ -15,7 +15,7 @@ class Delegate implements DelegateInterface
     {
         $i = random_int(0, 100);
         switch (true) {
-            case  (1 <= $i) && ($i <= 20):
+            case  (1 <= $i) && ($i <= 70):
                 $context = [
                     'event_type' => 'task_status',
                     'top_level_status' => 'success',
@@ -26,13 +26,12 @@ class Delegate implements DelegateInterface
                         'status' => 'success',
                     ],
                 ];
-                $this->getV1WorkerQueueMessage()->delete();
-                $this->getApiV1WorkerService()->getLogger()->alert('Deleted the message boss!', $context);
+                $this->getApiV1WorkerService()->getLogger()->notice('Got lucky this time boss!', $context);
                 break;
-            case (21 <= $i) && ($i <= 50):
+            case (71 <= $i) && ($i <= 80):
                 $this->onlyTakesIntegers('Not very lucky');
                 break;
-            case (51 <= $i) && ($i <= 90):
+            case (81 <= $i) && ($i <= 90):
                 throw new \LogicException('That was not very logical');
                 break;
             case (91 <= $i) && ($i <= 100):
