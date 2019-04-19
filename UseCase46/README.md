@@ -26,8 +26,6 @@
  docker-compose exec kojo_fitness bash -c 'cd UseCase46; ./vendor/bin/kojo db:setup:install $PWD/src/V1/Environment/';
  docker-compose exec kojo_fitness bash -c 'cd UseCase46; php ./bin/setup-worker.php';
  
- # Create messages for Kōjō to delete
- docker-compose exec kojo_fitness bash -c 'cd UseCase46; php ./bin/create-messages.php';
  
  # Run Kōjō to delete the messages and colorize the events
  docker-compose exec kojo_fitness bash -c 'cd UseCase46; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/' |  awk '{ 
