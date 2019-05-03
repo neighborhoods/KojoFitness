@@ -22,3 +22,4 @@ parameters:
 # Slow down the creation of new jobs after panicking while debugging
 #  process_pool_strategy.max_alarm_time: 1000000000
   process_pool_strategy.max_child_processes: 6
+  process.pool.logger.formatter.log_format: 'json_pretty_print'
