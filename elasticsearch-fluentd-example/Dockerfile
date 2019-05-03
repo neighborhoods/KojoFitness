@@ -27,4 +27,4 @@ RUN bash docker/build.sh \
     --xdebug ${INSTALL_XDEBUG} \
     --composer-install ${COMPOSER_INSTALL}
 
-CMD ["/bin/sh", "-c", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/vendor/bin/kojo process:pool:server:start /var/www/html/kojo_fitness.neighborhoods.com/UseCase46/src/V1/Environment/ 1>>/var/log/kojo/stdout.log 2>>/var/log/kojo/stderr.log"]
+ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase46/src/V1/Environment/"]
