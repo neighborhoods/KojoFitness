@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: kojo
+spec:
+  template:
+    metadata:
+      labels:
+        app: kojo
+    spec:
+      containers:
+        - image: kojo-fitness:no-error-UseCase46
+          name: kojo
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: KOJO_REDIS_HOST
+              value: redis
+            - name: KOJO_REDIS_PORT
+              value: "6379"
+            - name: DATABASE_HOST
+              value: postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: kojo
+            - name: DATABASE_USERNAME
+              value: kojo
+            - name: DATABASE_PASSWORD
+              value: kojofitness
+            - name: SQS_REGION
+              value: "us-east-1"
+            - name: DATABASE_ADAPTER
+              value: pgsql
