@@ -4,8 +4,10 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Symfony\Component\Finder\Finder;
 use Neighborhoods\Kojo\Api\V1\Job;
+use Symfony\Component\Finder\Finder;
+
+const PDO_CODE_VIOLATES_UNIQUE_CONSTRAINT = 23505;
 
 $discoverableDirectories[] = __DIR__ . '/../src/V1/Environment';
 $finder = new Finder();
@@ -24,7 +26,7 @@ $jobCreator->setCode('complex_logging_structure')
     ->setIsEnabled(true)
     ->setAutoCompleteSuccess(false)
     ->setAutoDeleteIntervalDuration('PT60S');
-$jobCreator->save();
+attemptSave($jobCreator);
 
 $jobCreator = (new Job\Type\Service())->addYmlServiceFinder($finder)->getNewJobTypeRegistrar();
 $jobCreator->setCode('same_job_different_code')
@@ -39,4 +41,22 @@ $jobCreator->setCode('same_job_different_code')
     ->setIsEnabled(true)
     ->setAutoCompleteSuccess(false)
     ->setAutoDeleteIntervalDuration('PT60S');
-$jobCreator->save();
+attemptSave($jobCreator);
+
+
+/**
+ * @param Job\Type\RegistrarInterface $jobCreator
+ * @throws \Doctrine\DBAL\DBALException
+ */
+function attemptSave(Job\Type\RegistrarInterface $jobCreator) : void
+{
+    try {
+        $jobCreator->save();
+    } catch (\Doctrine\DBAL\DBALException $exception) {
+        if ($exception->getPrevious()->getCode() == PDO_CODE_VIOLATES_UNIQUE_CONSTRAINT) {
+            echo sprintf(("Ignoring duplicate job exception: %s\n"), $exception->getPrevious()->getMessage());
+        } else {
+            throw $exception;
+        }
+    }
+}
