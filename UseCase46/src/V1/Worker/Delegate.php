@@ -13,28 +13,28 @@ class Delegate implements DelegateInterface
 
     public function businessLogic() : DelegateInterface
     {
-        $i = random_int(1, 70);
+        $executionPath = $this->determineExecutionPath();
         switch (true) {
-            case  (1 <= $i) && ($i <= 70):
+            case  (1 <= $executionPath) && ($executionPath <= 70):
                 $context = [
                     'event_type' => 'task_status',
                     'top_level_status' => 'success',
                     'nested_object' => [
                         'random_letters' => $this->randomLetterString(),
                         'random_word' => $this->randomWord(),
-                        'random_value' => $i,
+                        'random_value' => $executionPath,
                         'status' => 'success',
                     ],
                 ];
                 $this->getApiV1WorkerService()->getLogger()->notice('Got lucky this time boss!', $context);
                 break;
-            case (71 <= $i) && ($i <= 80):
+            case (71 <= $executionPath) && ($executionPath <= 80):
                 $this->onlyTakesIntegers('Not very lucky');
                 break;
-            case (81 <= $i) && ($i <= 90):
+            case (81 <= $executionPath) && ($executionPath <= 90):
                 throw new \LogicException('That was not very logical');
                 break;
-            case (91 <= $i) && ($i <= 100):
+            case (91 <= $executionPath) && ($executionPath <= 100):
                 $this->createDeepPreviousExceptionChain();
                 break;
             default:
@@ -44,22 +44,44 @@ class Delegate implements DelegateInterface
         return $this;
     }
 
-    public function onlyTakesIntegers(int $number)
+    protected function determineExecutionPath() : int
+    {
+        $desiredNamedRange = getenv('KOJO_FITNESS_USECASE46_EXCEPTIONS') ?: 'none';
+        switch ($desiredNamedRange) {
+            case 'all':
+                $executionPath = random_int(0, 100);
+                break;
+            case 'small':
+                $executionPath = random_int(0, 90);
+                break;
+            case 'big-only':
+                $executionPath = random_int(91, 100);
+                break;
+            default:
+                $executionPath = random_int(1, 70);
+                break;
+        }
+
+        return $executionPath;
+    }
+
+    protected function onlyTakesIntegers(int $number)
     {
         return $number;
     }
 
-    public function randomLetterString() : string
+    protected function randomLetterString() : string
     {
         $seed = ['mred', 'mris', 'crmls', 'bright'];
         return $this->randomElementFromArray($seed);
     }
 
-    public function randomWord() : string
+    protected function randomWord() : string
     {
         $seed = ['validation', 'ingestion', 'materialization'];
         return $this->randomElementFromArray($seed);
     }
+
 
     protected function randomElementFromArray(array $seed)
     {

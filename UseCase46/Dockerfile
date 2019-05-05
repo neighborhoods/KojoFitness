@@ -18,6 +18,7 @@ RUN apt-get update && \
         gcc \
         make \
         gettext-base \
+        procps \
         && \
     rm -r /var/lib/apt/lists/*
 
