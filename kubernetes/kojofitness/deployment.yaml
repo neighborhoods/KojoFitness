@@ -12,6 +12,8 @@ spec:
         - image: kojo-fitness:no-error-UseCase46
           name: kojo
           env:
+            - name: KOJO_FITNESS_USECASE46_EXCEPTIONS
+              value: none
             - name: REDIS_HOST
               value: redis
             - name: REDIS_PORT
