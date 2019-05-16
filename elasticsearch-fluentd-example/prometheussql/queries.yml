@@ -1,0 +1,15 @@
+- kojo_num_panicked_jobs_by_job:
+    sql: >
+      select type_code,count(*) total
+      from kojo_job
+      where assigned_state = 'panicked'
+      group by type_code;
+    data-field: total
+- kojo_num_assigned_state_by_job:
+    sql: >
+      select type_code, assigned_state, count(1) total from kojo_job group by assigned_state, type_code
+    data-field: total
+- kojo_age_oldest_waiting_job:
+    sql: >
+      select EXTRACT(SECONDS FROM (now()-max(created_at_date_time))) from kojo_job where assigned_state = 'waiting';
+    data-field: age

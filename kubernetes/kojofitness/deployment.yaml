@@ -1,0 +1,97 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: kojofitness
+spec:
+  template:
+    metadata:
+      labels:
+        app: kojofitness
+    spec:
+      containers:
+        - image: bearcode/kojofitness:UseCase46
+          name: kojofitness
+          env:
+            - name: KOJO_FITNESS_USECASE46_EXCEPTIONS
+              value: none
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: KOJO_REDIS_HOST
+              value: redis
+            - name: KOJO_REDIS_PORT
+              value: "6379"
+            - name: DATABASE_HOST
+              value: postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: kojo
+            - name: DATABASE_USERNAME
+              value: kojo
+            - name: DATABASE_PASSWORD
+              value: kojofitness
+            - name: SQS_REGION
+              value: "us-east-1"
+            - name: DATABASE_ADAPTER
+              value: pgsql
+      initContainers:
+        - name: init-redis
+          image: busybox:1.28
+          command: ['sh', '-c', 'until nslookup redis; do echo waiting for redis; sleep 2; done;']
+        - name: init-postgres
+          image: busybox:1.28
+          command: ['sh', '-c', 'until nslookup postgres; do echo waiting for postgres; sleep 2; done;']
+        - name: inti-tables
+          image: bearcode/kojofitness:UseCase46
+          command: [ '/var/www/html/kojo_fitness.neighborhoods.com/vendor/bin/kojo' , 'db:setup:install', '/var/www/html/kojo_fitness.neighborhoods.com/src/V1/Environment/']
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: KOJO_REDIS_HOST
+              value: redis
+            - name: KOJO_REDIS_PORT
+              value: "6379"
+            - name: DATABASE_HOST
+              value: postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: kojo
+            - name: DATABASE_USERNAME
+              value: kojo
+            - name: DATABASE_PASSWORD
+              value: kojofitness
+            - name: SQS_REGION
+              value: "us-east-1"
+            - name: DATABASE_ADAPTER
+              value: pgsql
+        - name: init-jobs
+          image: bearcode/kojofitness:UseCase46
+          command: ['php', './bin/setup-worker.php']
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: KOJO_REDIS_HOST
+              value: redis
+            - name: KOJO_REDIS_PORT
+              value: "6379"
+            - name: DATABASE_HOST
+              value: postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: kojo
+            - name: DATABASE_USERNAME
+              value: kojo
+            - name: DATABASE_PASSWORD
+              value: kojofitness
+            - name: SQS_REGION
+              value: "us-east-1"
+            - name: DATABASE_ADAPTER
+              value: pgsql

@@ -1,0 +1,215 @@
+version: '3.2'
+
+services:
+    ### Kōjō Fitness Container (php-fpm) #########################
+
+  kojo_fitness:
+    build:
+      context: .
+      args:
+      - INSTALL_XDEBUG=false
+      - COMPOSER_INSTALL=false
+    volumes:
+    - ../../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
+    - kojo_logs:/var/log/kojo
+    env_file:
+      - ../kojo.env
+    networks:
+      - back-tier
+    depends_on:
+      - fluentd
+    environment:
+      DATABASE_HOST: "docker.for.mac.localhost"
+      DATABASE_PORT: 5433
+      REDIS_HOST: "docker.for.mac.localhost"
+      REDIS_PORT: 6380
+      KOJO_REDIS_HOST: "docker.for.mac.localhost"
+      KOJO_REDIS_PORT: 6380
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: "docker.for.mac.localhost:24225"
+        tag: 'kojo_fitness'
+
+
+### Fluentd Logging Container ###############################################
+
+  fluentd:
+    build: fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+      - kojo_logs:/var/log/kojo
+    ports:
+      - "24225:24224"
+      - "24225:24224/udp"
+      - "24232:24231"
+      - "24232:24231/udp"
+    networks:
+      - back-tier
+    depends_on:
+      - elasticsearch
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: "5"
+
+  fluentdtest:
+    build: fluentd
+    volumes:
+      - ./fluentd/test-conf:/fluentd/etc
+    ports:
+      - "24233:24231"
+      - "24233:24231/udp"
+    networks:
+      - back-tier
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: "5"
+
+  prometheus:
+    image: prom/prometheus:v2.1.0
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9091:9090
+    links:
+      - alertmanager:alertmanager
+    networks:
+      - back-tier
+    restart: always
+  #    deploy:
+  #      placement:
+  #        constraints:
+  #          - node.hostname == ${HOSTNAME}
+
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+      - 9094:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    networks:
+      - back-tier
+    restart: always
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+  #    deploy:
+  #      placement:
+  #        constraints:
+  #          - node.hostname == ${HOSTNAME}
+
+  grafana:
+    image: grafana/grafana:6.0.2
+    user: "104"
+    depends_on:
+      - prometheus
+    ports:
+      - 3001:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - back-tier
+      - front-tier
+    restart: always
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9201:9200
+    networks:
+      - back-tier
+
+  elasticsearch2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch2
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata2:/usr/share/elasticsearch/data
+    networks:
+      - back-tier
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:6.7.0
+    container_name: kibana
+    environment:
+      SERVER_NAME: localhost
+      ELASTICSEARCH_URL: http://elasticsearch:9200/
+    ports:
+      - 5601:5601
+    networks:
+      - back-tier
+      - front-tier
+    ulimits:
+      nproc: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - ALL
+
+  sqlagent:
+    image: dbhi/sql-agent
+    networks:
+      - back-tier
+
+
+  prometheussql:
+    image: dbhi/prometheus-sql
+    command: -service http://sqlagent:5000 -config prometheus-sql.yml
+    links:
+      - sqlagent:sqlagent
+    networks:
+      - back-tier
+    ports:
+      - 3003:8080
+    volumes:
+      - ./prometheussql/queries.yml:/queries.yml
+      - ./prometheussql/config.yml:/prometheus-sql.yml
+
+### Volumes Setup ###########################################
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+  esdata1:
+    driver: local
+  esdata2:
+    driver: local
+  kojo_logs:
+    driver: local
+
+networks:
+  front-tier:
+  back-tier:

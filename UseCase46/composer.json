@@ -15,7 +15,7 @@
   },
   "require": {
     "php": ">=7.1",
-    "neighborhoods/kojo": "dev-feature/json-serializable-logger-context",
+    "neighborhoods/kojo": "^4.0.0",
     "aws/aws-sdk-php": "2.*"
   },
   "require-dev": {
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Neighborhoods\\KojoFitnessUseCase45\\": [
+      "Neighborhoods\\KojoFitnessUseCase46\\": [
         "src/",
         "fab/"
       ]
@@ -31,7 +31,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Neighborhoods\\KojoFitnessUseCase45\\": [
+      "Neighborhoods\\KojoFitnessUseCase46\\": [
         "test/",
         "test-fab/"
       ]
