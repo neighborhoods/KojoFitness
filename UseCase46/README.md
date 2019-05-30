@@ -1,5 +1,5 @@
 # Defines the fitness of Kōjō for
- - A single job that deletes SQS queue messages
+ - A single job emits different log messages based on random numbers. Useful for resting monitoring and alerting infrastructure.
  
  ## Setup UseCase46
  
