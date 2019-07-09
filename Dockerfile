@@ -21,7 +21,6 @@ COPY docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY docker/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 RUN bash docker/build.sh \
-    --composer-token ${COMPOSER_TOKEN} \
     --xdebug ${INSTALL_XDEBUG} \
     --composer-install ${COMPOSER_INSTALL}
 
