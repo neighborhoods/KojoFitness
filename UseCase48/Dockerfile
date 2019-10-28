@@ -1,21 +1,6 @@
 FROM neighborhoods/php-fpm-phalcon:php7.3_phalcon3.4_newrelic
 RUN apt-get update -y && apt-get install -y unzip procps
 
-# Install the PHP pdo_pgsql extention
-RUN docker-php-ext-install pdo_pgsql
-
-## Install Redis
-RUN pecl install redis-3.1.4 && \
-    docker-php-ext-enable redis
-
-## Install Opcache
-RUN docker-php-ext-install opcache && \
-    docker-php-ext-enable opcache
-
-# Install composer and add its bin to the PATH.
-RUN curl -s http://getcomposer.org/installer | php && \
-    mv composer.phar /usr/local/bin/composer
-
 #RUN apt-get update -y && apt-get install -y unzip procps
 ARG PROJECT_NAME=kojo_fitness
 
