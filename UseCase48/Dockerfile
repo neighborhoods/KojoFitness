@@ -1,38 +1,5 @@
-FROM php:7.3-fpm-stretch
-
-# Install base libs
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        curl \
-        openssh-client \
-        wget \
-        git \
-        libz-dev \
-        libpq-dev \
-        libssl-dev \
-        libxml2-dev \
-        libedit-dev \
-        libkrb5-dev \
-        libpcre3-dev \
-        libzip-dev \
-        gcc \
-        make \
-        gettext-base \
-        procps \
-        && \
-    rm -r /var/lib/apt/lists/*
-
-## Install PHP core modules
-RUN docker-php-ext-install \
-    zip \
-    sockets \
-    mbstring \
-    pcntl \
-    readline \
-    posix \
-    sysvmsg \
-    sysvsem \
-    sysvshm
+FROM neighborhoods/php-fpm-phalcon:php7.3_phalcon3.4_newrelic
+RUN apt-get update -y && apt-get install -y unzip procps
 
 # Install the PHP pdo_pgsql extention
 RUN docker-php-ext-install pdo_pgsql
