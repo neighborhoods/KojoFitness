@@ -1,4 +1,4 @@
-FROM neighborhoods/php-fpm-phalcon:php7.2_phalcon3.4
+FROM neighborhoods/php-fpm-phalcon:php7.3_phalcon3.4_newrelic
 RUN apt-get update -y && apt-get install -y unzip procps
 ARG PROJECT_NAME=kojo_fitness
 
@@ -24,5 +24,5 @@ RUN bash docker/build.sh \
     --xdebug ${INSTALL_XDEBUG} \
     --composer-install ${COMPOSER_INSTALL}
 
-#CMD ["php-fpm"]
+CMD ["/usr/bin/tail", "-f", "/dev/null"]
 #ENTRYPOINT ["/var/www/html/kojo_fitness.neighborhoods.com/UseCase40/vendor/bin/kojo", "process:pool:server:start", "/var/www/html/kojo_fitness.neighborhoods.com/UseCase40/src/V1/Environment/"]
