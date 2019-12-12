@@ -16,8 +16,8 @@ parameters:
     !php/const \Psr\Log\LogLevel::ERROR: false
     !php/const \Psr\Log\LogLevel::WARNING: false
     !php/const \Psr\Log\LogLevel::NOTICE: false
-    !php/const \Psr\Log\LogLevel::INFO: false
-    !php/const \Psr\Log\LogLevel::DEBUG: false
+    !php/const \Psr\Log\LogLevel::INFO: true
+    !php/const \Psr\Log\LogLevel::DEBUG: true
 
 # Slow down the creation of new jobs after panicking while debugging
 #  process_pool_strategy.max_alarm_time: 1000000000
