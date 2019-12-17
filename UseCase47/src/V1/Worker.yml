@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\KojoFitnessUseCase47\V1\WorkerInterface:
+    class: Neighborhoods\KojoFitnessUseCase47\V1\Worker
+    public: true
+    shared: false
+    calls:
+      - [setV1WorkerDelegateRepository, ['@neighborhoods.v1.worker.delegate.repository']]
