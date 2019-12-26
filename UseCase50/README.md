@@ -10,7 +10,7 @@ Setting up the containers using docker-compose:
 # Get the latest repo
 git clone git@github.com:neighborhoods/KojoFitness.git;
 cd KojoFitness;
-git checkout 4.x;
+git checkout master;
 git pull;
 
 # Start the containers

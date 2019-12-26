@@ -92,7 +92,7 @@ class Worker implements WorkerInterface
                     'job_id' => $this->getApiV1WorkerService()->getJobId()
                 ]
             );
-            throw new \Error('Uncaught userspace exception');
+            throw new \Error('Uncaught userspace error');
         }
 
         // unreachable
