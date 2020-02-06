@@ -1,0 +1,34 @@
+{
+  "name": "neighborhoods/kojo-fitness",
+  "type": "library",
+  "description": "Neighborhoods Kōjō Examples provides example patterns for implementing Kōjō workers.",
+  "license": "MIT",
+  "keywords": [],
+  "authors": [
+    {
+      "name": "Przemyslaw Mucha",
+      "email": "przemyslaw.mucha@55places.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.2",
+    "neighborhoods/kojo": "dev-KOJO-153-write-to-job-state-changelog"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neighborhoods\\KojoFitnessUseCase51\\": [
+        "src/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Neighborhoods\\KojoFitnessUseCase51\\": [
+        "test/"
+      ]
+    }
+  }
+}

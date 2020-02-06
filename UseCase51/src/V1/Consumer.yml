@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\KojoFitnessUseCase51\V1\ConsumerInterface:
+    class: Neighborhoods\KojoFitnessUseCase51\V1\Consumer
+    public: true
+    shared: false
