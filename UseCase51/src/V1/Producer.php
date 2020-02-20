@@ -18,8 +18,11 @@ class Producer implements ProducerInterface
         try {
             $this->happyPath();
             $this->userspacePDOException();
-            $this->userspacePDOWarnedError();
-            $this->userspacePDOSilentError();
+            // PDO with ERRMODE other than ERRMODE_EXCEPTION don't play well with doctrine, so we've added
+            // code in commit 4df8cffc98933970608341e2b89d1cb392748978 to guard against it for now
+            // I'm leaving in these two cases for the future when we can better handle non-exception errmodes
+            // $this->userspacePDOWarnedError();
+            // $this->userspacePDOSilentError();
             $this->transactionalJobStateTransition();
         } catch (\Throwable $throwable) {
             $this->getApiV1WorkerService()->getLogger()->error($throwable->getMessage(), ['exception' => $throwable]);
