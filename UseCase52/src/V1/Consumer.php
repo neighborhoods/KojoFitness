@@ -41,7 +41,33 @@ class Consumer implements ConsumerInterface
         $pdo->exec("DELETE FROM userspace_table WHERE consumer_job_id = $jobId");
 
         $this->getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
+        $this->getApiV1WorkerService()->getLogger()->notice(
+            'log message to check memory version of assigned state',
+            ['requested_state' => 'complete_success']
+        );
 
+        // Do weird things to dsync the Memory version of the the job and the persistence layer
+        $pdo->rollBack();
+        $this->getApiV1WorkerService()->getLogger()->notice(
+            'post-rollback',
+            ['requested_state' => 'complete_success']
+        );
+
+        // Calling this method prevents the alert message
+        $this->getApiV1WorkerService()->reload();
+
+
+        $this->getApiV1WorkerService()->getLogger()->notice(
+            'post-reload',
+            ['requested_state' => 'complete_success']
+        );
+
+        $pdo->beginTransaction();
+        $this->getApiV1WorkerService()->requestHold()->applyRequest();
+        $this->getApiV1WorkerService()->getLogger()->notice(
+            'second attempt',
+            ['requested_state' => 'hold']
+        );
         $pdo->commit();
 
         return $this;
