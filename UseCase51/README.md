@@ -28,7 +28,7 @@ docker-compose exec kojo_fitness bash -c 'cd UseCase51; php ./bin/create-userspa
 docker-compose exec kojo_fitness bash -c 'cd UseCase51; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/';
 
 # If everything works as expected, you should see two "successfully consumed" messages from the Consumer
-# You should also see the following rows in the kojo_job_state_changelog (8 total):
+# If you have neighborhoods.kojo.data.job.should_log_job_state_changes set, you should also see the following rows in the kojo_job_state_changelog (8 total):
 #     Producer (waiting -> working), (working -> complete_success)
 #     Consumer 1 (new -> waiting), (waiting -> working), (working -> complete_success)
 #     Consumer 2 (new -> waiting), (waiting -> working), (working -> complete_success)

@@ -15,7 +15,7 @@
   },
   "require": {
     "php": ">=7.2",
-    "neighborhoods/kojo": "dev-KOJO-153-write-to-job-state-changelog"
+    "neighborhoods/kojo": "dev-KOJO-192-add-flag-for-job-state-change-logging"
   },
   "autoload": {
     "psr-4": {
