@@ -4,8 +4,79 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9d87a2894d05cef9869ce7e4ca56ab3",
+    "content-hash": "3e89d8d2ba3e791f5f3518887e7a3820",
     "packages": [
+        {
+            "name": "datadog/dd-trace",
+            "version": "0.51.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataDog/dd-trace-php.git",
+                "reference": "963a83c33390e115c22a5c861e5674646438075a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataDog/dd-trace-php/zipball/963a83c33390e115c22a5c861e5674646438075a",
+                "reference": "963a83c33390e115c22a5c861e5674646438075a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": "^5.4 || ^7.0 || ^8.0.0"
+            },
+            "require-dev": {
+                "ext-posix": "*",
+                "g1a/composer-test-scenarios": "~3.0",
+                "mockery/mockery": "*",
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "^3.3.0",
+                "symfony/process": "<5"
+            },
+            "type": "library",
+            "extra": {
+                "scenarios": {
+                    "opentracing1": {
+                        "require": {
+                            "opentracing/opentracing": "1.0.0-beta6"
+                        },
+                        "scenario-options": {
+                            "create-lockfile": false
+                        }
+                    }
+                },
+                "scenario-options": {
+                    "dependency-licenses": false
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DDTrace\\": "./src/api/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "José Carlos Chávez",
+                    "email": "jcchavezs@gmail.com"
+                },
+                {
+                    "name": "DataDog",
+                    "email": "dev@datadoghq.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP APM Client",
+            "keywords": [
+                "DataDog",
+                "php",
+                "tracing"
+            ],
+            "time": "2020-11-17T15:24:54+00:00"
+        },
         {
             "name": "doctrine/cache",
             "version": "1.10.2",
@@ -387,6 +458,49 @@
                 "psr-3"
             ],
             "time": "2020-07-23T08:35:51+00:00"
+        },
+        {
+            "name": "neighborhoods/datadog-component",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neighborhoods/DatadogComponent.git",
+                "reference": "2ed1508b8e577ce9c1d5337b8b833b0f303e2ebc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neighborhoods/DatadogComponent/zipball/2ed1508b8e577ce9c1d5337b8b833b0f303e2ebc",
+                "reference": "2ed1508b8e577ce9c1d5337b8b833b0f303e2ebc",
+                "shasum": ""
+            },
+            "require": {
+                "datadog/dd-trace": "0.51.0",
+                "php": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Neighborhoods\\DatadogComponent\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Harsh Patel",
+                    "email": "harsh.patel@55places.com"
+                },
+                {
+                    "name": "Brad Wilson",
+                    "email": "brad.wilson@neighborhoods.com"
+                }
+            ],
+            "description": "A component to provide access to the Datadog PHP API.",
+            "time": "2020-11-23T23:10:52+00:00"
         },
         {
             "name": "neighborhoods/kojo",

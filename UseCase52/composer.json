@@ -16,7 +16,8 @@
   "require": {
     "php": ">=7.2",
     "neighborhoods/kojo": "5.*",
-    "symfony/console": "4.3.*"
+    "symfony/console": "4.3.*",
+    "neighborhoods/datadog-component": "^1.0"
   },
   "require-dev": {
     "php": ">=7.1"
