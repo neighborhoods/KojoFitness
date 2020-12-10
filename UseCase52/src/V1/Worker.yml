@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\KojoFitnessUseCase52\V1\WorkerInterface:
+    class: Neighborhoods\KojoFitnessUseCase52\V1\Worker
+    public: true
+    shared: false

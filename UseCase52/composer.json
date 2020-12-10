@@ -1,0 +1,38 @@
+{
+  "name": "neighborhoods/kojo-fitness",
+  "type": "library",
+  "description": "Neighborhoods Kōjō Examples provides example patterns for implementing Kōjō workers.",
+  "license": "MIT",
+  "keywords": [],
+  "authors": [
+    {
+      "name": "Brad Wilson",
+      "email": "brad.wilson@neighborhoods.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.2",
+    "neighborhoods/kojo": "5.*",
+    "symfony/console": "4.3.*"
+  },
+  "require-dev": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neighborhoods\\KojoFitnessUseCase52\\": [
+        "src/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Neighborhoods\\KojoFitnessUseCase52\\": [
+        "test/"
+      ]
+    }
+  }
+}
