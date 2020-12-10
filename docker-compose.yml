@@ -25,16 +25,31 @@ services:
     build:
       context: .
       args:
-      - INSTALL_XDEBUG=true
-      - COMPOSER_INSTALL=false
+        - INSTALL_XDEBUG=true
+        - COMPOSER_INSTALL=false
     volumes:
-    # Shares AWS credentials to the docker container
-    - $HOME/.aws:/root/.aws
-    - $HOME/.aws:/var/www/.aws
+      # Shares AWS credentials to the docker container
+      - $HOME/.aws:/root/.aws
+      - $HOME/.aws:/var/www/.aws
     volumes_from:
-    - applications
+      - applications
     env_file:
       - kojo.env
+    environment:
+      DD_AGENT_HOST: datadog-agent
+      DD_TRACE_AGENT_PORT: 8126
+      DD_SERVICE: "kojo-fitness"
+      DD_ENV: "local"
+      # this enables tracing of PHP scripts from the CLI
+      DD_TRACE_CLI_ENABLED: "true"
+      # this disables sending traces via a background thread as it doesn't work correctly with forked processes
+      DD_TRACE_BETA_SEND_TRACES_VIA_THREAD: "false"
+      # this disables generating a root span to allow tracing of long running processes
+      DD_TRACE_GENERATE_ROOT_SPAN: "false"
+      # this enables flushing of the tracer when all spans are closed to allow tracing of long running processes
+      DD_TRACE_AUTO_FLUSH_ENABLED: "true"
+      # this automatically finishes all spans when the tracer is flushed
+      DD_AUTOFINISH_SPANS: "true"
 
 ### MySQL Container #########################################
 
@@ -68,15 +83,26 @@ services:
       POSTGRES_USER: kojo
       POSTGRES_PASSWORD: kojofitness
 
-### Redis Container #########################################
+  ### Redis Container #########################################
 
   redis:
     build: ./redis
     volumes:
-    - redis:/data
+      - redis:/data
     ports:
-    - "6380:6379"
+      - "6380:6379"
 
+  ### DataDog Container #########################################
+  datadog-agent:
+    image: datadog/agent:7
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    env_file:
+      - datadog_api_key.env
+    environment:
+      DD_SITE: "datadoghq.com"
 ### Volumes Setup ###########################################
 
 volumes:
