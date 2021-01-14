@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace Neighborhoods\KojoFitnessUseCase52\V1;
 
+use Neighborhoods\DatadogComponent\GlobalTracer;
 use Neighborhoods\Kojo\Api;
 
 class Worker implements WorkerInterface
 {
     use Api\V1\Worker\Service\AwareTrait;
+    use GlobalTracer\Repository\AwareTrait;
 
     public function work() : WorkerInterface
     {
@@ -43,10 +45,12 @@ class Worker implements WorkerInterface
 
     private function businessLogic() : WorkerInterface
     {
+        $scope = $this->getGlobalTracerRepository()->get()->startActiveSpan('BusinessLogic');
+        $scope->getSpan()->setTag('type_code', 'kojofitness_5x_base');
         $this->succeed();
 
         $this->getApiV1WorkerService()->requestCompleteSuccess()->applyRequest();
-
+        $scope->close();
         return $this;
     }
 
