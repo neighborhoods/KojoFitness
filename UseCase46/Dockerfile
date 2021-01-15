@@ -19,6 +19,7 @@ RUN apt-get update && \
         make \
         gettext-base \
         procps \
+        unzip \
         && \
     rm -r /var/lib/apt/lists/*
 
