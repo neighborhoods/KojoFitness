@@ -13,3 +13,6 @@ Each `UseCaseXY` directory contains a README.md detailing its specifics.
 - UseCase44: Setup Kōjō database on an environment with non-primitive column types
 - UseCase45: A single worker that sometimes requests a retry instead of doing its job
 - UseCase46: Logging a mix of complex worker status messages and uncaught exceptions
+- UseCase50: Basic functionality in the 5.x branch
+- UseCase51: Interactions between job state change logging and userspace transactions
+- UseCase52: DataDog APM integration
