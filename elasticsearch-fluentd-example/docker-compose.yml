@@ -223,6 +223,15 @@ services:
     networks:
       - back-tier
 
+  redis_exporter:
+    image: oliver006/redis_exporter
+    environment:
+      - REDIS_ADDR=redis
+    ports:
+      - 9121:9121
+    networks:
+      - back-tier
+
   pgsql_data:
     image: tianon/true
     volumes:
