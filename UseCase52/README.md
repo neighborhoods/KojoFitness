@@ -47,7 +47,9 @@ docker-compose exec kojo_fitness bash -c 'cd UseCase52; php ./bin/initialize-use
 # Run Kōjō
 docker-compose exec kojo_fitness bash -c 'cd UseCase52; ./vendor/bin/kojo process:pool:server:start $PWD/src/V1/Environment/';
 
-# at this point there are no workers
+# at this point there are no workers, use the bin/schedule-* scripts to introduce one type of worker to pull work off the queue
+# if you want to try a different type of worker, stop kojo, run bin/clear-jobs-and-work.php to reset everything, then
+# bin/create-work.php to add work
 
 # Delete the Kōjō Tables and clear redis
 docker-compose exec kojo_fitness bash -c 'cd UseCase52; ./vendor/bin/kojo db:tear_down:uninstall $PWD/src/V1/Environment/';

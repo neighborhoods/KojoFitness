@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// change these values to simulate different workloads
+// (e.g. small number of models + large amount of work = contention)
+// (e.g. large number of models + large amount of work = room for parallelization)
 const NUMBER_OF_MODELS = 1000;
 const NUMBER_OF_UNITS_OF_WORK = 10000;
 
