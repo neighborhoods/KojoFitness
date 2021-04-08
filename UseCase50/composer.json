@@ -14,12 +14,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": ">=7.2",
-    "neighborhoods/kojo": "5.x-dev",
-    "symfony/console": "4.3.*"
-  },
-  "require-dev": {
-    "php": ">=7.1"
+    "neighborhoods/kojo": "dev-KOJO-224-configurable-disable-job-type-logging-5x"
   },
   "autoload": {
     "psr-4": {

@@ -17,4 +17,18 @@ parameters:
     !php/const \Psr\Log\LogLevel::WARNING: false
     !php/const \Psr\Log\LogLevel::NOTICE: false
     !php/const \Psr\Log\LogLevel::INFO: false
-    !php/const \Psr\Log\LogLevel::DEBUG: true
+    !php/const \Psr\Log\LogLevel::DEBUG: false
+
+  # logging overrides
+
+  # explicitly use the default of 'warning'
+  neighborhoods.kojo.environment.parameters.kojospace_logging_levels.disabled_job_type: !php/const \Psr\Log\LogLevel::WARNING
+
+  # use a lower logging level than the default of 'warning'
+  # neighborhoods.kojo.environment.parameters.kojospace_logging_levels.disabled_job_type: !php/const \Psr\Log\LogLevel::DEBUG
+
+  # try using a non-existent logging level (kojo spins, trying to start workers, but running into an exception each time)
+  # neighborhoods.kojo.environment.parameters.kojospace_logging_levels.disabled_job_type: 'nonexistent'
+
+  # try making the logging level null (kojo itself crashes from the type error)
+  # neighborhoods.kojo.environment.parameters.kojospace_logging_levels.disabled_job_type: null
