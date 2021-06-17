@@ -32,6 +32,7 @@ fi
 if [ "$INSTALL_XDEBUG" = true ]; then
     echo "Installing the xdebug extension..."
     # An xdebug version grater than xdebug-2.7.0alpha1 is required due to https://bugs.xdebug.org/bug_view_page.php?bug_id=00000938
-    pecl install xdebug-2.8.0
+    pecl install xdebug-3.0.0
+    # pecl install xdebug-2.8.0
     docker-php-ext-enable xdebug
 fi

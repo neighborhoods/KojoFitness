@@ -14,7 +14,7 @@
     "sort-packages": true
   },
   "require": {
-    "neighborhoods/kojo": "dev-KOJO-224-configurable-disable-job-type-logging-5x"
+    "neighborhoods/kojo": "dev-KOJO-235-php8-release"
   },
   "autoload": {
     "psr-4": {

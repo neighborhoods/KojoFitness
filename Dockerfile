@@ -1,4 +1,5 @@
-FROM neighborhoods/php-fpm-phalcon:php7.3_phalcon3.4_newrelic
+FROM neighborhoods/php-fpm:8.0
+# FROM neighborhoods/php-fpm-phalcon:php7.3_phalcon3.4_newrelic
 RUN apt-get update -y && apt-get install -y unzip procps
 ARG PROJECT_NAME=kojo_fitness
 
