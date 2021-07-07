@@ -5,12 +5,11 @@ services:
 
   kojo_fitness:
     build:
-      context: .
+      context: ../UseCase46
       args:
-      - INSTALL_XDEBUG=false
-      - COMPOSER_INSTALL=false
+        - INSTALL_XDEBUG=false
+        - COMPOSER_INSTALL=true
     volumes:
-    - ../../KojoFitness/:/var/www/html/kojo_fitness.neighborhoods.com
     - kojo_logs:/var/log/kojo
     env_file:
       - ../kojo.env
@@ -18,21 +17,38 @@ services:
       - back-tier
     depends_on:
       - fluentd
+      - redis
+      - pgsql
     environment:
-      DATABASE_HOST: "docker.for.mac.localhost"
-      DATABASE_PORT: 5433
-      REDIS_HOST: "docker.for.mac.localhost"
-      REDIS_PORT: 6380
-      KOJO_REDIS_HOST: "docker.for.mac.localhost"
+      DATABASE_HOST: "pgsql"
+      DATABASE_PORT: 5432
+      REDIS_HOST: "redis"
+      REDIS_PORT: 6379
+      KOJO_REDIS_HOST: "host.docker.internal"
       KOJO_REDIS_PORT: 6380
     logging:
       driver: "fluentd"
       options:
-        fluentd-address: "docker.for.mac.localhost:24225"
+        fluentd-address: "host.docker.internal:24225"
         tag: 'kojo_fitness'
 
+  pgsql:
+    build: ./postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    volumes_from:
+      - pgsql_data
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: kojo
+      POSTGRES_USER: kojo
+      POSTGRES_PASSWORD: kojofitness
+    networks:
+      - back-tier
 
-### Fluentd Logging Container ###############################################
+
+  ### Fluentd Logging Container ###############################################
 
   fluentd:
     build: fluentd
@@ -128,7 +144,6 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-    container_name: elasticsearch
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
@@ -146,7 +161,6 @@ services:
 
   elasticsearch2:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-    container_name: elasticsearch2
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
@@ -163,7 +177,6 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:6.7.0
-    container_name: kibana
     environment:
       SERVER_NAME: localhost
       ELASTICSEARCH_URL: http://elasticsearch:9200/
@@ -199,15 +212,44 @@ services:
       - ./prometheussql/queries.yml:/queries.yml
       - ./prometheussql/config.yml:/prometheus-sql.yml
 
+  ### Redis Container #########################################
+
+  redis:
+    build: ./redis
+    volumes:
+      - redis:/data
+    ports:
+      - "6380:6379"
+    networks:
+      - back-tier
+
+  redis_exporter:
+    image: oliver006/redis_exporter
+    environment:
+      - REDIS_ADDR=redis
+    ports:
+      - 9121:9121
+    networks:
+      - back-tier
+
+  pgsql_data:
+    image: tianon/true
+    volumes:
+      - ./data/pgsql:/docker-entrypoint-initdb.d
+
 ### Volumes Setup ###########################################
 volumes:
-  prometheus_data: {}
-  grafana_data: {}
+  prometheus_data: { }
+  grafana_data: { }
   esdata1:
     driver: local
   esdata2:
     driver: local
   kojo_logs:
+    driver: local
+  redis:
+    driver: local
+  postgres:
     driver: local
 
 networks:
