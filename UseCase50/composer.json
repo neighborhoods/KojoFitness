@@ -14,7 +14,7 @@
     "sort-packages": true
   },
   "require": {
-    "neighborhoods/kojo": "dev-KOJO-235-php8-release"
+    "neighborhoods/kojo": "dev-KOJO-237-fix-php8-release"
   },
   "autoload": {
     "psr-4": {
