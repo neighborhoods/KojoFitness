@@ -9,6 +9,7 @@ parameters:
   neighborhoods.kojo.environment.parameters.database_host: '%env(DATABASE_HOST)%'
   neighborhoods.kojo.environment.parameters.database_name: '%env(DATABASE_NAME)%'
 
+  neighborhoods.kojo.data.job.should_log_job_state_changes: true
   neighborhoods.kojo.process.pool.logger.level_filter_mask:
     !php/const \Psr\Log\LogLevel::EMERGENCY: false
     !php/const \Psr\Log\LogLevel::ALERT: false
