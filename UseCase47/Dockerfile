@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-stretch
+FROM neighborhoods/php-fpm:8.0
 
 # Install base libs
 RUN apt-get update && \
@@ -38,7 +38,7 @@ RUN docker-php-ext-install \
 RUN docker-php-ext-install pdo_pgsql
 
 ## Install Redis
-RUN pecl install redis-3.1.4 && \
+RUN pecl install redis-6.3.0 && \
     docker-php-ext-enable redis
 
 ## Install Opcache
