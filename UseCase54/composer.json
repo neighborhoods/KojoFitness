@@ -1,0 +1,38 @@
+{
+  "name": "neighborhoods/kojo-fitness",
+  "type": "library",
+  "description": "Demonstrates Kōjō compatibility with Symfony 5.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hrvoje Jukic",
+      "email": "yuca.jukic@55places.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/kojo",
+      "options": {
+        "symlink": false
+      }
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "neighborhoods/kojo": "dev-hotfix-symfony-upgrade",
+    "symfony/dependency-injection": "^5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neighborhoods\\KojoFitnessUseCase54\\": [
+        "src/"
+      ]
+    }
+  }
+}
